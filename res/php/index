@@ -1,0 +1,1955 @@
+<?php #declare(strict_types=1); #why not? 
+// header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');header('Last-Modified: '.gmdate('D, Y M d H:i:s').' GMT');header('Cache-control: no-cache, must-revalidate');header('Cache-control: post-check=0, pre-check=0', false);header('Cache-control: max-age=0', false);header('Pragma: no-cache'); #makes cache go away
+?>
+<!--<script>document.location.reload(true);</script> infinite loop of reload for client to blow his computer up, hahahaha...-->
+<audio src='res/M.wav' autoplay loop id='a'></audio>
+<script>
+	history.scrollRestoration = "manual";
+	document.addEventListener("DOMContentLoaded", function(event) {
+    	var scrollpos = localStorage.getItem('scrollpos');
+    	if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+    window.onbeforeunload = function(e) {
+    	localStorage.setItem('scrollpos', window.scrollY);
+	};
+
+	var a=document.getElementById("a");
+	a.volume=0.01;
+	document.body.addEventListener("mousemove",function(){a.play()})
+</script>
+
+<!--<h1>Im just trying to work, stop bugging me!</h1>-->
+
+<h1>Chapter 2: basics of php</h1>
+<?php
+
+	#L2
+	echo('<h3>C2L2: why is that first? work with numbers e</h3>');
+	echo(PHP_INT_MAX);echo'<br>';
+	$v1=3.14;$v2=3.14e9;$v3=3.14e-9;
+	echo$v1+$v2."+$v3<br>";
+	$b0=false;$b1=true;
+	echo(true." ;$b0;<br>");
+	$n=null;echo";$n={null}=".null.';<br>';
+	echo('<br>');
+
+	#L1
+	echo('<h3>C2L1: printing like sprinting</h3>');
+	echo "\u{2620}\u{032A}\u{0346}\u{034B}\u{0320}\u{0321}\u{0322}\u{0323}\u{0324}\u{0325}<br>"; /* hdgsd */
+	echo 'It <b>'; #jkagiughf
+	echo 'Worked</b><br>'; //jfosdhfi
+	echo('<br>');
+
+	#L3
+	echo('<h3>C2L3: basic functions</h3>');
+	$a=5;$b=7;
+	echo isset($a).'<br>';
+	echo gettype($b).'<br>';
+	$b=(float)$b; #but will be double!!!
+	echo(gettype($b).'<br>');
+	$s='Hen tai';echo('Is string? Answer:'.is_string($s).'!<br>');
+	echo((int)$s.'<br>');
+	$st='1245';echo((int)$st.'<br>');
+	echo(is_numeric($st).'<br>');
+	echo('Set:'.isset($s));unset($s);echo('.Not set:'.isset($s).'. Magic!<br>');
+	echo('<br>');
+
+	#L4
+	echo('<h3>C2L4: references</h3>');
+	$a=1;$b=&$a;$a=2;echo($b.'<br>'); #hard ref
+	$b=4;echo($a.'<br>');
+	unset($b);echo($a.'<br>');
+	$a=3;$b='a';echo($$b.'<br>'); #symbolic ref
+	$$b=13;echo($a.'<br>');
+	#object ref later	
+	echo('<br>');
+
+	#L5
+	echo('<h3>C2L5: defined constants</h3>');
+	define('COL','#c00');echo(COL.'<br>');
+	echo(defined('COL').'<br>');
+	echo(__FILE__.'<br>'); #built-in constants
+	echo(PHP_VERSION.'<br>');
+	?><p style='color: <?=COL?>'>Hi, how are you?</p><?php
+	echo('Bad.<br>');
+	echo('<br>');
+
+	#L6
+	echo('<h3>C2L6: meth</h3>');
+	$x=7;$y=10;$z=$x+$y;echo("x = $x; y = $y");
+	echo("<br>Addition of x and y is equal to $z");
+	echo('<br>Subtraction of y from x is '.$x-$y);
+	echo('<br>Multiplication of x adn y is '.$x*$y);
+	echo('<br>Division of x by y is '.$x/$y);
+	echo('<br>Modulo of 25 by 10 is '.(25%10));
+	echo('<br>x to power y is '.$x**$y);
+	echo('<br>-100 to power 0.5 (not equal to square) is '.-100**(1/2));
+	$x++;$x=$x+1;echo("<br>x = $x");
+	echo('<br>x = '.$x++.". Or not: $x.");
+	echo('<br>Also y = '.($y**=2).". Or not: $y");
+	echo('<br><br>');
+
+	#L7
+	echo('<h3>C2L7: string operations</h3>');
+	$s1='His string';$s2='Old string';$s3=$s1.$s2;echo($s1.' - '.$s2.'<br>');
+	echo($s3);
+	echo("<br>Character with index 2 in string \"$s1\": ".$s1[2]);
+	echo("<br>There will be not an error: {$s3}N<br>");
+	$res=`date`;echo($res.'<br>');
+	echo(iconv("CP866", "UTF-8", $res)); #if i had os configured for common usage in rus
+	echo('<br><br>');
+
+	#L8
+	echo('<h3>C2L8: logic operations</h3>');
+	$x=10;$y=0;$b1=$x>10;$b2=$y==0;echo("x > 10 = $b1, y == 0 = $b2<br>");
+	$b1=true;$b2=false;echo('Denial b1: '.!$b1);echo('<br>b1 or b2: '.($b1||$b2));echo('<br>b1 and b2: '.($b1&&$b2));echo('<br>b1 xor b2: '.($b1 xor $b2));echo('<br>'.(!($b1&&$b2)xor(!$b1||$x<10)).'<br>');
+	$x=5;$y='5';echo('x == y: '.($x==$y));echo('<br>x === y: '.($x===$y));
+	echo('<br><br>');
+
+	#Wild form appeared
+	?>
+		<h2>WILD FORM APPEARED!</h2>
+		<form action="" method="post">
+			<p>Your name: <input type="text" name="name"></p>
+			<p>Your card number: <input type="text" name="card"></p>
+			<p><input type="submit"></p>
+		</form>
+		<script>if(window.history.replaceState) window.history.replaceState(null,null,window.location.href);</script>
+	<?php
+	if(isset($_POST['name'])&&isset($_POST['card'])){	
+		echo('Hi, '.htmlspecialchars($_POST['name']).'<br>');
+		echo('YOUR card number: '.(int)$_POST['card'].'. Now is mine, yoink.<br>');
+	}else{echo('Nothing to see here!<br>');}
+	echo('<br>');
+
+	#L9
+	echo('<h3>C2L9: if function</h3>');
+	$x=7;if($x<10){echo('x<10<br>');}else{echo('x>=10<br>');}
+	if($x<7){echo('x<7<br>');}elseif($x>7){echo('x>7<br>');}else{echo('x=7<br>');}
+	$a=5;$b=3;if($a<$b||$b==3){echo('true');}else{echo('false');}
+	?>
+		<div>
+			<a href="?com=add">Add</a>
+			<a href="?com=mult">Multiplicate</a>
+		</div>
+	<?php
+	if(isset($_GET['com']))	$com=htmlspecialchars($_GET['com']);
+	else $com=false;
+	$com=isset($_GET['com'])?htmlspecialchars($_GET['com']):false; #much better than if above, right?
+	#$com=htmlspecialchars($_GET['com'])??false; #more better, but will show warning with htmlspecialchars and without com
+	echo $com.'<br>';	
+	$com=$_GET['com']??false; #more better, but dangeruos?
+	if($com=='add') echo("$a + $b = ".$a+$b);
+	elseif($com=='mult') echo("$a * $b = ".$a*$b);
+	elseif($com) echo('You shall not pass, '.htmlspecialchars($com).'!');
+	echo '<br><br>';
+
+	#L10
+	echo('<h3>C2L10: for function</h3>');
+	for($i=0;$i<3;$i++) echo 'Hello! ';echo '<br>';
+	for($i=10;$i>0;$i-=2) echo "$i, ";echo '0.<br>';
+	$sum=0;$n=10;for($i=1;$i<=$n;$i++){$sum+=$i;echo("<b>$i)</b> sum = $sum, ");}
+	echo"<b>11)</b> sike!<br>Addition of numbers from 1 to $n is $sum<br>";
+	for($i=0;$i<10;$i++){if($i==3) continue;echo "$i | ";if($i==7) break;}
+	echo '<br><br>';
+	
+	#L11
+	echo('<h3>C2L11: while function</h3>');
+	$i=0;while($i<10){echo "$i | ";$i++;} #infinite while works just fine, only makes your server run on 100% cpu until client that requested page crushes (server becomes honorable warrior)
+	$sum=0;$n=10;$i=0;while($i<=10){$sum+=$i;$i++;}echo "<br>sum from 1 to $n is $sum<br>";
+	$x=0;do{echo $x;}while($x<-1);echo '<br>';
+	$i=0;while($i<10):echo "$i | ";$i++;endwhile; #same as first one
+	echo '<br><br>';
+
+	#L12 <=> <- UFO
+	echo('<h3>C2L12: switch-case function</h3>');
+	$x='Hi';if(gettype($x)=='string') echo 'x - string<br>';elseif(gettype($x)=='integer') echo 'x - integer<br>';elseif(gettype($x)=='boolean') echo 'x - boolean<br>';else echo 'x - unidentified type<br>';
+	switch(gettype($x)){case 'string':echo 'x - string<br>';break;case 'integer':echo 'x - integer<br>';break;case 'boolean':echo 'x - boolean<br>';break;default:echo 'x - unidentified type<br>';}
+	$a=1;$b=2;switch($a<=>$b){case 0:echo "$b = $a<br>";break;case 1:echo "$a > $b<br>";break;case -1:echo "$a < $b<br>";}	
+	switch(gettype($x)):case 'string':echo 'x - string<br>';break;case 'integer':echo 'x - integer<br>';break;case 'boolean':echo 'x - boolean<br>';break;default:echo 'x - unidentified type<br>';endswitch; #same
+	echo '<br><br>';
+
+	#L13
+	echo('<h3>C2L13: arrays and tables</h3>');
+	$arr=array(1,2,3,4,5,32);$ar=[1,2,3,'sike',true];echo $ar[4].'<br>'; #indexed arrays
+	for($i=0;$i<count($ar);$i++){echo "$ar[$i] | ";}echo '<br>';
+	$ar2=['name'=>'Bear','age'=>1.01];echo $ar2['name'];echo '<br>'; #associative array
+	$ar3=[[1,2],[3,5,true]];echo $ar3[1][2].'<br>'; #multidimensional array
+	$zoo=[['name'=>'Bear','age'=>1.01],['name'=>'Python','age'=>31],['name'=>'gnu','age'=>39]]; #bidimensional assiocative array
+	echo $zoo[1]['age'].'<br>';
+	for($i=0;$i<count($ar3);$i++) for($j=0;$j<count($ar3[$i]);$j++) echo $ar3[$i][$j].' | ';
+	echo '<br><br>';
+
+	#L14
+	echo('<h3>C2L14: foreach function</h3>');
+	$ar=[1,5,0,true,false,'String',2.5];
+	foreach($ar as $v) echo $v.' | ';echo '<br>';
+	$zoo=[['name'=>'Bear','age'=>1.01],['name'=>'Python','age'=>31],['name'=>'gnu','age'=>39]];
+	foreach($zoo as $k=>$v){echo $k.' || ';foreach($v as $i=>$bv) echo "$i | $bv | ";echo '| ';}echo '<br>';
+	$ar=[];for($i=0;$i<100;$i++) $ar[]=$i*5; foreach($ar as $v) echo "$v | ";echo '<br>';
+	foreach($ar as $i=>$v) $ar[$i]=$v*2;foreach($ar as $v) echo "$v | ";echo '<br>';
+	foreach($ar as &$v) $v*=2;foreach($ar as $v) echo "$v | ";echo '<br>'; #hard ref $v, duplicates last element!!!
+	echo '<br><br>';
+	
+	#L15
+	echo('<h3>C2L15: operations with arrays</h3>');
+	$ar=['Bear','of Fox',1.01];$f=$ar[0];$s=$ar[1];$a=$ar[2];echo "$f, $s, $a";unset($f,$s,$a);echo "!$f!$s!$a!<br>";
+	list($f,$s,$a)=$ar;echo "$f, $s, $a<br>";
+	list(,$s,)=$ar;echo "$s<br>";
+	$ar1=['n1'=>'Bear','n2'=>'Fish'];$ar2=['n3'=>'Bird','n4'=>'Animal'];$ar=$ar1+$ar2;foreach($ar as $v) echo $v.' | ';echo '<br>';
+	$ar1=['n1'=>'Bear','n2'=>'Fish','n3'=>'Turtle'];$ar2=['n1'=>'Bird','n2'=>'Animal'];$ar=$ar2+$ar1;foreach($ar as $v) echo $v.' | ';echo '<br>';
+	echo "array['name 1'] = {$ar['n1']}";
+	echo '<br><br>';
+
+	#L16
+	echo('<h3>C2L16: custom functions</h3>');
+	function hc($c=1){if(!is_int($c)){echo 'error!';return;} for($i=0;$i<$c;$i++) echo 'hi ';}hc(5);echo '<br>';
+	hc();echo '<br>';
+	function sum($a,$b,$r=false){if($r) return($a+$b);echo "$a + $b = ".$a+$b;}function gsum($a,$b){$sum=$a+$b;return($sum);}
+	sum(5, -3);$s=gsum(10,5);echo "<br>$s<br>";
+	function ch(&$a){$a++;}$a=5;ch($a);echo $a.'<br>'; #HARD
+	function sumall(){$sum=0;for($i=0;$i<func_num_args();$i++){if(!is_numeric(func_get_arg($i))){echo func_get_arg($i).' is not number! ';continue;};$sum+=func_get_arg($i);}return($sum);} # func_num_args() and func_get_arg() is useful!
+	echo sumall(20,546,2,-346,'L',0.19,'gdsg','3','2.81').'<br>';
+	function dif(int $a,int $b):int{return($a-$b);}echo dif(6.5,5.9); #does not work with declare(strict_type=1)!!!
+	echo '<br><br>';
+
+	#L17
+	echo('<h3>C2L17: local and global variables</h3>');
+	unset($a);$x=5;function func($x){$a=2;$x++;}func(10);echo $x.','.$a.'<br>';
+	function tg(){/*global $x;$x++;*/$GLOBALS['x']++;}tg();echo $x.'<br>';
+	$a=7;$v=10;foreach($GLOBALS as $i=>$v){if(is_array($v)) continue;echo "$i = $v, ";}echo '<br>'; #global variables, its better to not store any html special characters in globals!!!
+	function getCount(){static $count=0;$count++;return($count);}for($i=0;$i<10;$i++) echo getCount().' ';echo '<br>'; #static is always the same local variable
+	echo $count;
+	echo '<br><br>';
+
+	#L18
+	echo('<h3>C2L18: recursion in functions</h3>');
+	function factorial($n){if($n<=1) return(1);return($n*factorial($n-1));}echo factorial(-5); #Matroshka brain
+	echo '<br><br>';
+	
+	#L19
+	echo('<h3>C2L19: anonymous functions</h3>');
+	$ze=function($s){echo "$s | ";};$ze('Warudo!');echo gettype($ze).'<br>'; #object programming
+	function t($a,$f){$ar=[];for($i=0;$i<$a;$i++) $ar[]=$f($i);return $ar;}
+	$ar=t(10,function($i){return $i*$i;});foreach($ar as $v) echo $v.' | ';
+	echo '<br><br>';
+
+	#L20
+	echo('<h3>C2L20: generators</h3>');
+	function gen1(){for($i=1;$i<100;$i*=10) echo '1';yield 1;echo '2';yield 2;echo '3';yield 3;}foreach(gen1() as $v){echo " - from cycle $v<br>";}echo '<br>';
+	function gen2($from,$to){for($i=$from;$i<$to;$i++){echo "$i - ";yield($i);}}foreach(gen2(1,10) as $v) echo 'Double: '.($v*2).'<br>';echo '<br>';
+	function doubleArray($ar,$callback){foreach($ar as $v) yield($callback($v));}$ar=[1,2,3,4,6,9];$gen=doubleArray($ar,function($v){return($v*2);});foreach($gen as $v) echo "$v | ";echo '<br>';
+	echo gettype($gen).'<br>'; #generator is generator, not array, but more like array of commands, that generates more variables than in array!
+	$ar=['Python'=>'31','gnu'=>'39'];function gen3($ar,$callback){foreach($ar as $i=>$v) yield $i=>$callback($v);}$gen=gen3($ar,function($v){return(($v<32)?'newbe':'Master');});foreach($gen as $i=>$v) echo "$i - $v | ";echo '<br>'; #yield($i=>$callback($v)) - does not work!!!
+	/*generators are merciful to ram*/
+	$count=2000000;$ar=[];$s=0;for($i=0;$i<$count;$i++) $ar[]=$i;foreach($ar as $v) $s+=$v;echo "Sum: $s<br>";echo memory_get_usage().'<br>';unset($ar);echo memory_get_usage().'<br>'; #without generator
+	#$s=0;for($i=0;$i<$count;$i++) $s+=$i;echo "Sum: $s<br>";echo memory_get_usage().'<br>'; #My version
+	function emem($count){for($i=0;$i<$count;$i++) yield($i);}$s=0;foreach(emem($count) as $v) $s+=$v;echo "Sum: $s<br>";echo memory_get_usage().'<br>'; #with generator (just commands without array of variables, that consume memory like pigs)
+	echo '<br><br>';
+	
+	#L21
+	echo('<h3>C2L21: debugging functions</h3>');
+	$ar=[1,3,4,10];foreach($ar as &$v) $v*=2;unset($v);foreach($ar as $v) echo $v.' | ';echo '<br>'; #unset $v alse deletes hard reference, that fixes problem of the same last value in L14
+	echo '<pre>';print_r($ar);echo '</pre>'; #pre shows us preformatted code of html
+	var_dump($ar);echo '<br>'; #with any number of variables
+	var_export($ar); #that functions also you can shove in other variables like so: $v = print_r($ar, true);
+	echo '<br><br>';
+	
+	#L22
+	echo('<h3>C2L22: built-in $_SERVER array</h3>');
+	echo '<pre>';print_r($_SERVER);echo '</pre>';
+	echo '<br>';
+	
+	#L23
+	echo('<h3>C2L23: forms handler</h3>');
+	unset($x,$y,$sum);$sum=false;$x=false;$y=false;
+	#$_GET $_POST $_REQUEST
+    print_r($_GET);echo '<br>';print_r($_POST);echo '<br>';print_r($_REQUEST);echo '<br>';
+    if(isset($_POST['mf'])){echo 'Form is sent!';
+    $x=$_POST['x']??false;$y=$_POST['y']??false;
+    if($x!==false&&$y!==false&&is_numeric($x)&&is_numeric($y)) $sum=$x+$y;}?>
+    <?php if($sum!==false):?><p>Sum is: <?=$sum?></p><?php endif?><?php
+	?>
+		<form name=mf action=<?=$_SERVER['REQUEST_URI']?> method=post><!--Useful REQUEST_URI!-->
+			<div>
+				X: <input type=text name=x value=<?=$x?>>
+			</div>
+			<div>
+				Y: <input type=text name=y value=<?=$y?>>
+			</div>
+			<div>
+		    	<input type=submit name=mf value=summarize>
+			</div>
+		</form>
+	<?php
+	echo '<br>';
+
+	#L24
+	echo('<h3>C2L24: include and require</h3>');
+	unset($x,$y,$sum);$sum=false;$x=false;$y=false;
+	require($_SERVER['DOCUMENT_ROOT'].'/lib/functions'); #just copy and paste but, if does not exist it crashes
+	require_once('lib/functions'); #once is required to make sure it was not included before!
+	if(isset($_POST['mf'])){echo 'Form is sent!';$x=$_POST['x']??false;$y=$_POST['y']??false;$sum=summarize($x,$y);}
+	if($sum!==false):?><p>Sum is: <?=$sum?></p><?php endif;
+	include('res/form'); #same as require but, if does not exist it continues to work
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<h1>Chapter 3: basic functions</h1>
+<?php
+
+	#L1
+	echo('<h3>C3L1: Meth functions</h3>');
+	echo M_PI.', '.M_E.'<br>';
+	$x=-3;echo abs($x).'<br>';
+	$x=12.175610436781;echo round($x).', ';echo round($x,2).', ';echo round($x,-1).'<br>';
+	echo floor($x).', ';echo ceil($x).'<br>';
+	echo mt_rand(1,5).', ';$ar=[];for($i=0;$i<10;$i++) $ar[]=mt_rand(1,100);print_r($ar);echo '<br>';
+	echo base_convert(base_convert('zxhbfih',36,2),10,36).'<br>';
+	echo sin($x).', '.cos($x).', '.tan($x).'<br>';
+	$x=-0.85987568975656754764356265746489352736547436578;echo asin($x).', '.acos($x).', '.atan($x).'<br>';
+	echo rad2deg($x).', '.deg2rad(2398567865).'<br>';	
+	echo '<br>';
+	for($i=0;$i<10;$i++) $ar[$i]=mt_rand(1000,100000)/100;print_r($ar);echo '<br>';foreach($ar as &$v){$v*=0.77;round($v,2);}unset($v);print_r($ar);echo '<br>';
+	$a=$_POST['a']??0;$b=$_POST['b']??0;$o=mt_rand($a,$b);
+	?>
+		<form name=f1 action=<?=$_SERVER['REQUEST_URI']?> method=post>
+			<div>A: <input type=number name=a value=<?=$a?>></div>
+			<div>B: <input type=number name=b value=<?=$b?>></div>
+			<div><input type=submit name=f1 value='Random number between A and B:'> <?=$o?></div>
+		</form>
+	<?php
+	echo '<br>';
+	
+	#L2
+	echo('<h3>C3L2: string functions</h3>');
+	$s1 = 'Hello World!';$s2 = 'Привет, мир!';echo $s1[1].', '.$s2[1].'<br>';
+	echo strlen($s1).', '.strlen($s2).'<br>'; #text code is different with cyrillic alphabet: it is multibyte (mb)!
+	echo mb_strlen($s1).', '.mb_strlen($s2).'<br>'; #3-rd party module mb is bultin to php, but not installed on debian repo: sudo apt install php-mbstring and restart apache!!!
+	echo strpos($s1,'llo').'<br>'; #ALL FUNCTIONS '*str*' can be replaced with 'mb_*str*'!!!
+	if(strpos($s1,'He')!==false) echo 'Y';else echo 'N';echo '<br>';
+	echo substr($s1,1,4).'<br>';
+	echo mb_substr($s2,1,4).'<br>';
+	$e='    oisdhfj@oijdf.com  ';echo $e.', '.trim($e).'<br>';
+	echo str_replace('и','a',$s2).'<br>';
+	$t='..., %name%. ... %site%!<br>';echo str_replace(['%name%','%site%'],['nama','web'],$t);
+	echo strtolower($s1).'<br>';
+	echo mb_strtoupper($s2).'<br>';
+	echo '<a href=?a='.urlencode('ttt ttt & ttt').'>URL</a><br>';echo $_GET['a'].'<br>';
+	echo urldecode('ttt+ttt+%26+ttt').'<br>';
+	$s3='<a><img>"\' & <br>';echo htmlspecialchars($s3).'<br>';echo "&lt;a&gt;&#039<br>";
+	echo strip_tags($s3,'<br>');
+	echo md5($s3).'<br>'; #md5 is insecure!!!!!!!!!!!!
+	
+	#SECURITY ALERT
+	echo crypt($s3,PASSWORD_BCRYPT).'<br>'; #replaced by password_hash
+	echo password_hash($s3,PASSWORD_BCRYPT).'<br>';
+	echo password_hash($s3,PASSWORD_BCRYPT).'<br>';
+	if(password_verify($s3,password_hash($s3,PASSWORD_BCRYPT))) echo 'Y';else echo 'N'; #simple verify of passwords without PEPPER!!!!
+	#SECURITY DEALERT
+	
+	echo '<br>'.uniqid().'<br>'; #function of time, so theoretically it can be identical for multiple clients!
+	echo wordwrap('This is very long string with many uncertain moments and nuisances!',10);
+	echo nl2br("\n");echo nl2br(wordwrap('This is very long string with many uncertain moments and nuisances!',10));
+	$m1='58';$m2='89.326';echo '<br>'.sprintf('%.2f',$m1).', '.sprintf('%.2f',$m2).'<br>'; #if you want to see zeros
+	echo '<br>';
+	$a1=$_POST['a1']??'';$b1=$_POST['b1']??'';$c1='';
+	?>
+		<form name=f2 action=<?=$_SERVER['REQUEST_URI']?> method=post>
+			<div><textarea name=a1 placeholder='Text for finding strings'><?=$a1?></textarea></div>
+			<div><input type=text name=b1 placeholder='String to find' value='<?=$b1?>'></div>
+			<input type=submit name=f2 value='Find!'>
+		</form>
+	<?php
+	if(is_string($a1)&&$a1!=''){echo mb_strlen($a1).' - length of string in textarea<br>';if(is_string($b1)&&$b1!=''){$ar1=mb_str_split($a1);$ar2=mb_str_split($b1);foreach($ar1 as $k=>&$v){if($ar1[$k]==$ar2[0]){$fl=1;for($i=0;($i+1<count($ar2))&&($i+$k+1<count($ar1))&&($ar1[$i+$k+1]==$ar2[$i+1]);$i++) $fl++;for($i=0;$fl==count($ar2)&&($i+1<count($ar2));$i++){$v=$v.$ar1[$k+$i+1];$ar1[$k+$i+1]='';}if($fl==count($ar2)) $v="<b>$v</b>";}$c1=$c1.$v;}unset($k,$v,$ar1,$ar2,$fl);echo $c1.'<br>';}}
+	echo '<br>';
+	
+	#L3
+	echo('<h3>C3L3: array functions</h3>');
+	$a=[5,5,7,2,3,7,0];print_r($a);echo '<br>';$a=array_unique($a);print_r($a);echo '<br>';
+	$x=5;if(is_array($x)) foreach($x as $v) echo $v; #to print each element you dont use for() anymore!
+	shuffle($a);print_r($a);echo '<br>';
+	print_r(array_reverse($a));echo '<br>';
+	print_r(array_flip($a));echo '<br>';
+	$a=['name'=>'Pelican','age'=>'10029'];print_r(array_values($a));echo '<br>';
+	print_r(array_keys($a));echo '<br>';
+	$l1=[5,7,8];$l2=[10,8,20];$l=$l1+$l2;print_r($l);echo '<br>';
+	$l=array_merge($l1,$l2);print_r($l);echo '<br>';
+	$l=range(1,100);print_r($l);echo '<br>';
+	for($i=0;$i<100;$i++) echo '1!';echo '<br>';foreach(range(1,100) as $v) echo '1!';echo '<br>';
+	$l=array_slice($l,10,5);print_r($l);echo '<br>';
+	shuffle($l);print_r($l);echo ', ';sort($l);print_r($l);echo '<br>';
+	rsort($l);print_r($l);echo '<br>';
+	$l=['1'=>5,'2'=>0,'4'=>10,'name'=>12];asort($l);print_r($l);echo '<br>';
+	arsort($l);print_r($l);echo '<br>'; #ksort for sorting based on keys
+	function mySort($a,$b){if($a%10==0&&$b%10!=0) return 1;if($a%10!=0&&$b%10==0) return -1;return $a<=>$b;}$l=[30,40,25,20,12,15,50,40];uasort($l,'mySort');print_r($l);echo '<br>'; #usort() same, but for lists without keys;uksort for keys only.
+	echo '<br>';
+	unset($ar);for($i=0;$i<20;$i++) $ar[]=mt_rand(-100,100);print_r($ar);echo '<br>'.$ar[mt_rand(0,19)].'<br>';$ar=explode(' ',$c1);shuffle($ar);$c1=implode(' ',$ar);echo $c1.'<br>';$ar=[['name'=>'Python','age'=>31],['name'=>'Gnu','age'=>39],['name'=>'Ruby','age'=>27],['name'=>'Rust','age'=>12]];print_r($ar);echo '<br>';uasort($ar,function($a,$b){if($a['age']>$b['age']) return 1;else return -1;});print_r($ar);echo '<br>';
+	echo '<br>';
+
+	#L4
+	echo('<h3>C3L4: data and time functions</h3>');
+	$start=microtime(true);echo $start.'<br>';
+	for($i=0;$i<10000;$i++);echo 'time of running for() script: '.microtime(true)-$start.'<br>';
+	$time=time();echo $time.'<br>';
+	echo 'Time rigth now: '.date('d.m.Y H:i:s').'<br>';
+	$time=mktime(2,0,30,5,10,987);echo 'My time: '.date('d.m.Y H:i:s',$time).'<br>';
+	$time=strtotime('12.05.9016');echo $time.'<br>';
+	echo date('Y.m.d',$time).'<br>';
+	$d=30;$m=1;$y=32000;if(checkdate($m,$d,$y)) echo 'Correct date';else echo 'Date is not correct';echo '<br>';
+	function getGM($local){$offset=date('Z',$local);return $local-$offset;}echo '<br>'.getGM(time()).'<br>'.date('Y.m.d H:i:s',getGM(time())).'<br>';function getLM($gm,$offset){return $gm+$offset;}echo date('Y.m.d H:i:s',getLM(getGM(time()),3600*3)).'<br>';	
+	echo '<br>';
+	$st=microtime(1);for($i=0;$i<10**7;$i++);echo 'Running for loop time: '.microtime(1)-$st.'<br>';$rt=time()+mt_rand(1,10)*10000;echo $rt.'<br>';echo 'Current time: '.date('Y.m.d H:i:s').'. Random time: '.date('Y.m.d H:i:s',$rt).'.<br>';echo 'Time until random time: '.date('z\d H:i:s',$rt-time()).'<br>';
+	$sel=$_POST['sel']??'';
+	?>
+	   	<form name=f4 action=<?=$_SERVER['REQUEST_URI']?> method=post>
+			<select name=sel>
+				<option value=a2>Greenwich Mean Time</option>
+				<option value=b2>West Greenland Time</option>
+				<option value=c2>Australian Eastern Standart Time</option>
+			</select>
+			<input type=submit value=Select!>
+   		</form>
+    <?php
+	echo 'Server time: '.date('Y.m.d H:i:s').'. User time: ';switch($sel){case 'a2':echo date('Y.m.d H:i:s',time()-3600).'<br>';break;case 'b2':echo date('Y.m.d H:i:s',time()-14400).'<br>';break;case 'c2':echo date('Y.m.d H:i:s',time()+32400).'<br>';}
+	echo '<br>';
+
+	#L5
+	echo('<h3>C3L5: file functions</h3>');
+	$handler=fopen('res/a.txt','a+');echo fread($handler,12).'<br>';fclose($handler);
+	$h=fopen('res/a.txt','a+');
+	$count=1;$str='';while(!feof($h)){$str.=fread($h,$count);}echo $str.'<br>';
+	fseek($h,0);echo fread($h,filesize('res/a.txt')).'<br>';
+	fwrite($h,"\nNew string");
+	fclose($h);
+	$str=file_get_contents('res/a.txt');echo $str.'<br><br>';
+	file_put_contents('res/a.txt',file_get_contents('res/a.txt')."Hello\nWorld!");
+	#echo file_get_contents('https://google.com').'<br>';
+	copy('res/a.txt','b');echo file_get_contents('b').'<br><br>';
+	rename('b','c');echo file_get_contents('c').'<br>';
+	unlink('c');
+	$h=tmpfile();fwrite($h,'abc');fseek($h,0);echo fread($h,3);fclose($h);
+	file_put_contents('res/a.txt',"Hello\nWorld!");
+	echo '<br>';
+	$te=$_POST['te']??'';$sld=$_POST['sld']??'';$db='res/db.txt';$pl='';if(!file_exists($db)){$pl='File does not exist';if($sld=='Save'){if(file_put_contents($db,$te)==false){$te='';$pl='Could not save';}else{$te='';$pl='Saved successfully';}}}else{$pl='File exists';if($sld=='Save'){if(file_put_contents($db,$te,FILE_APPEND)==false){$te='';$pl='Could not save';}else{$te='';$pl='Saved successfully';}}if($sld=='Load'){$te=file_get_contents($db);$pl=$te;if($te==false) $pl='Could not load';if($te=='') $pl='Empty file';}if($sld=='Delete'){if(unlink($db)){$te='';$pl='File deleted successfully';}else{$te='';$pl='Could not delete file';}}}
+	?>
+	<form name=f5 action=<?=$_SERVER['REQUEST_URI']?> method=post>
+		<div><textarea name=te placeholder='<?=$pl?>'><?=$te?></textarea></div>
+		<input type=submit name=sld value=Save>
+		<input type=submit name=sld value=Load>
+		<input type=submit name=sld value=Delete>
+	</form>
+	<?php
+	echo '<br>';
+	
+	#L6
+	echo('<h3>C3L6: ini files parsing</h3>');
+	$ar=parse_ini_file('res/config.ini',true,INI_SCANNER_RAW);print_r($ar);echo '<br>';
+	echo $ar['Config']['site'].'<br>';
+	echo php_ini_loaded_file().'<br>';
+	echo '<br>';
+	$pi=parse_ini_file('res/config.ini',true);$al=['en','zh','ru'];$lan=substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);foreach($al as $v) if((isset($_GET['lang']))&&($_GET['lang']==$v)) $lan=$v;foreach($al as $v) if($lan==$v) $tit=$pi[$v]['title'];
+	?>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<style>
+			.p{
+				color: <?=$pi['text']['col']?>;
+				font-size: <?=$pi['text']['fs']?>;
+			}
+		</style>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Frog</title>
+	</head>
+	<body>
+		<p class="p"><?=$tit?></p>
+		<p class="p">A</p>
+		<p class="p">very thougthfull</p>
+		<p class="p">paragraphs!</p>
+	</body>
+	</html>
+	<?php
+	echo '<br>';
+	
+	#L7
+	echo('<h3>C3L7: security of files</h3>');
+	echo 'First minutes and i already have opinion of this lesson: <b class=p>heresy</b><br>';
+	print_r(posix_getpwuid(fileowner('res/a.txt')));
+	chown('res/a.txt','i');echo fileowner('res/a.txt').'<br>'; #only works if www-data in sudoers!!!
+	chmod('res/a.txt',0644);echo decoct(fileperms('res/a.txt')).','.exec('whoami').'<br>';
+	$f=fopen(__FILE__,'r');if(!flock($f,LOCK_EX|LOCK_NB)) exit('Script is already running!');
+	echo '<br>';
+	#sleep(2); #just fast reload second same index and will get exit!
+	echo '<br>';
+	
+	#L8
+	echo('<h3>C3L8: directory functions</h3>');
+	mkdir('new dir/new dir',0755,true);
+	rmdir('new dir/new dir');rmdir('new dir');
+	$ar=glob('*.php');print_r($ar);echo '<br>';
+	function printDir($folder,$space=''){$files=scandir($folder);foreach($files as $file){if($file=='.'||$file=='..') continue;$f=$folder.'/'.$file;echo $space.$file.'<br>';if(is_dir($f)) printDir($f,$space.'&nbsp;&nbsp;&nbsp;&nbsp;');}}printDir('.');echo '<br>';print_r(scandir('.'));echo '<br>';
+	echo file_exists('index.php'); #for files functions, L5
+	echo '<br>';
+	$a=[];$ar=[];for($i=0;$i<5;$i++){$a[]=uniqid();mkdir($a[$i]);}$i=mt_rand(0,4);$n=uniqid();file_put_contents($a[$i].'/'.$n,'');exec('ls -aR',$ar);foreach($ar as $k=>$v)	if((substr($v,0)!='.')&&(substr($v,-1)!=':')||(strlen($v)==1)) echo '&nbsp;&nbsp;'.$v.'&nbsp;&nbsp;';else echo '<br><br>&nbsp;&nbsp;'.$v.'<br>';foreach($a as $v) if($v!=$a[$i]) rmdir($v);else{unlink("$v/$n");rmdir($v);}unset($a,$i,$n,$ar);
+	echo '<br><br><br>';
+
+	#L9
+	echo('<h3>C3L9: DNS functions</h3>');
+	// $ip_address=gethostbyname('google.com');echo $ip_address.'<br>'; #commented, because it consumes internet
+	// $hostname=gethostbyaddr($ip_address);echo $hostname.'<br>';
+	echo '<br>';
+
+	#L10
+	echo('<h3>C3L10: exec function</h3>');
+	$str=`dir`;echo $str.'<br>'; #echo iconv('CP866','UTF-8',$str).'<br>'; for rus names in directory
+	system('dir');echo '<br>';
+	echo exec('dir').'<br>'; #prints only partial result of command, can be used as exec('dir',$array) and in $array will be full output
+	exec('file/on/server');
+	echo '<br>';
+	$a3=$_POST['a3']??'';$b3=$_POST['b3']??'';
+	?>
+	<form name=f10 action=<?=$_SERVER['REQUEST_URI']?> method=post>	
+		<div><input type=text name=a3 placeholder='Command to execute on server'> PS: Dont abuse me please!</div>
+		<div><input type=text name=b3 placeholder='Path to file on server'><input type=submit value=Open> Does not work btw</div>
+	</form>
+	<?php
+	if($a3!='') echo `$a3`;
+	#if($b3!='') exec($b3); because im using separate server!
+	echo '<br>';
+
+	#L11
+	echo('<h3>C3L11: regular expressions(REGEX!)</h3>');
+	echo '<br>';
+	echo 'From php.net/manual/en/function.preg-match.php first comment!<br><br>Simple regex<br><br>Regex quick reference<br>[abc]&nbsp; &nbsp;&nbsp; A single character: a, b or c<br>[^abc] &nbsp; &nbsp;&nbsp; Any single character but a, b, or c<br>[a-z] &nbsp; &nbsp;&nbsp; Any single character in the range a-z<br>[a-zA-Z] &nbsp; &nbsp;&nbsp; Any single character in the range a-z or A-Z<br>^ &nbsp; &nbsp;&nbsp; Start of line<br>$ &nbsp; &nbsp;&nbsp; End of line<br>\A &nbsp; &nbsp;&nbsp; Start of string<br>\z &nbsp; &nbsp;&nbsp; End of string<br>. &nbsp; &nbsp;&nbsp; Any single character<br>\s &nbsp; &nbsp;&nbsp; Any whitespace character<br>\S &nbsp; &nbsp;&nbsp; Any non-whitespace character<br>\d &nbsp; &nbsp;&nbsp; Any digit<br>\D &nbsp; &nbsp;&nbsp; Any non-digit<br>\w &nbsp; &nbsp;&nbsp; Any word character (letter, number, underscore)<br>\W &nbsp; &nbsp;&nbsp; Any non-word character<br>\b &nbsp; &nbsp;&nbsp; Any word boundary character<br>	(...) &nbsp; &nbsp;&nbsp; Capture everything enclosed<br>(a|b) &nbsp; &nbsp;&nbsp; a or b<br>a? &nbsp; &nbsp;&nbsp; Zero or one of a<br>a* &nbsp; &nbsp;&nbsp; Zero or more of a<br>a+ &nbsp; &nbsp;&nbsp; One or more of a<br>a{3} &nbsp; &nbsp;&nbsp; Exactly 3 of a<br>a{3,} &nbsp; &nbsp;&nbsp; 3 or more of a<br>a{3,6} &nbsp; &nbsp;&nbsp; Between 3 and 6 of a<br><br>options: i case insensitive m make dot match newlines x ignore whitespace in regex o perform #{...} substitutions only once<br>'; #For myself simple regex
+	echo '<br>';
+	$reg='/a \dM/';$str='a 2M';echo preg_match($reg,$str,$matches).', '.preg_match($reg,'a M').'<br>';
+	print_r($matches);echo '<br>';
+	$reg='#a \d b#';$str='sdgsdga 8 basdw68796';echo preg_match($reg,$str).'<br>'; # # is same as / in php regex
+	$reg='#a \D b#';$str='sdgsdga 2 basdw68796';echo preg_match($reg,$str).'<br>';
+	$reg='#a \w b#';$str='sdgsdga 8 basdw68796';echo preg_match($reg,$str).'<br>';
+	$reg='#a \W b#';$str='sdgsdga 8 basdw68796';echo preg_match($reg,$str).'<br>';
+	$reg='#a \s b#';$str='sdgsdga 	 basdw68796';echo preg_match($reg,$str).'<br>';
+	$reg='#a \s b#';$str='sdgsdga s basdw68796';echo preg_match($reg,$str).'<br>';
+	echo '<br>';
+	$str='57abc /7abc a7cdc 57abd A889c';$reg='/\w\w{3}c/';preg_match_all($reg,$str,$matches);print_r($matches);
+	echo '<br>';
+
+	#L12
+	echo('<h3>C3L12: regular expressions(REGEX!)</h3>');
+	$reg='/a . b/';$str='a s b';echo preg_match($reg,$str).'<br>';
+	$reg='/^ab/';$str='abasd';echo preg_match($reg,$str).'<br>';
+	$reg='/ab$/';$str='asdaab';echo preg_match($reg,$str).'<br>';
+	$reg='/a [a-z][0-2] b$/';$str='a c1 b';echo preg_match($reg,$str).'<br>';
+	$reg='/a [^a-z] b$/';$str='a 3 b';echo preg_match($reg,$str).'<br>';
+	$reg='/a [a-z]a\d b/';$str='a aa5 b';echo preg_match($reg,$str,$matches).', ';print_r($matches);echo '<br>';
+	$reg='/a ([a-z]a\d) b/';$str='a aa5 b';echo preg_match($reg,$str,$matches).', ';print_r($matches);echo '<br>';
+	$reg='/a ([a-z]A)* b/';$str='a aAaAaAzA b';echo preg_match($reg,$str).'<br>'; #mathces any times, even zero
+	$reg='/a ([a-z]A)+ b/';$str='a aAaAaAzA b';echo preg_match($reg,$str).'<br>'; #mathces at least once
+	$reg='/a a? b/';$str='a a b';echo preg_match($reg,$str).'<br>'; #matches 0 or 1 times
+	$reg='/a \d{3} b/';$str='a 123 b';echo preg_match($reg,$str).'<br>'; #matches exactly 3 times
+	$reg='/a \d{2,} b/';$str='a 222 b';echo preg_match($reg,$str).'<br>'; #matches 2 and more times
+	$reg='/a \d{2,5} b/';$str='a 22222 b';echo preg_match($reg,$str).'<br>'; #matches 2-5 times
+	echo 'Modificators<br>';
+	$reg='/A \d b/i';$str='a 2 b';echo preg_match($reg,$str).'<br>'; #ignores letters case
+	$reg='/a\s \d b/x';$str='a 2b';echo preg_match($reg,$str).'<br>'; #ignores spaces in $reg
+	$reg='/ab$/m';$str="ab\nddd";echo preg_match($reg,$str).'<br>'; #stops to ignore regex in $str
+	$reg='/".*"/m';$str='abc "23" abc "45"';echo preg_match($reg,$str,$matches).', ';print_r($matches);echo '<br>'; #greedy
+	$reg='/".*?"/m';$str='abc "23" abc "45"';echo preg_match_all($reg,$str,$matches).', ';print_r($matches);echo '<br>'; #not greedy
+	$reg='/"(.*?)"/m';$str='abc "23" abc "45"';echo preg_match_all($reg,$str,$matches).', ';print_r($matches);echo '<br>'; #lazy(ascetic)
+	echo '<br>';
+	$d=date('Y.m.d H:i:s');preg_match_all('/\w{1,5}/',$d,$matches);print_r($matches);echo '<br>';
+	echo '<br>';
+
+	#L13
+	echo('<h3>C3L13: regular expressions(REGEX!)</h3>');
+	$reg='/^[a-z0-9_]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z]*\.)+([a-z]{2,4})$/';$em1='abc@mail.ru';$em2='abc@mail.mail.com';$em3='abc.dd_dd@mail.com';$em4='abc';$em5='abc@sadf';$em6='dsad abc@asf.ru asdasd';for($i=1;$i<7;$i++) echo preg_match($reg,${"em$i"}).', ';echo '<br>';
+	$reg='/[a-z0-9_]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z]*\.)+([a-z]{2,4})/';$text='Send me to e-mail abc@abc.abc .I will be glad to hear all opinions. Also my second e-mail is mail@mail.com .';$text=preg_replace($reg,'No e-mail',$text);echo $text.'<br>';
+	$date='12.07.2017';$reg='/(\d{2})\.(\d{2})\.(\d{4})/';echo preg_replace($reg,'$2.$1.$3',$date).'<br>';
+	$reg='/https?:\/\/(?!localhost\/)\S+/';$str='Write me on website http://e.c/user/me . I will be glad to hear all opinions. Also my second accaunt is https://example.com . With love http://localhost/asf/as.sd !';echo preg_replace($reg,'<b>links are banned</b>',$str).'<br>';
+	echo '<br>';
+
+	#L14
+	echo('<h3>C3L14: phpinfo() function</h3>');
+	#phpinfo();
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<h1>Chapter 4: OOP in php</h1>
+<?php
+
+	#L1
+	echo('<h3>C4L1: Class creation</h3>');
+	class User1{
+		public$name='User'; #any variable is property
+		public$email; #btw spaces does not matter)
+	}
+	$user=new User1();
+	echo $user->name.', '.$user->email.'<br>';
+	$user->email='abc@abc.abc';
+	echo $user->email.'<br>';
+	$user1=new User1();
+	$user1->name='Python';$user1->email='31@mail.31';
+	echo $user1->name.', '.$user1->email.'<br>';
+	unset($user,$user1);
+	echo '<br>';
+	class Point{public$x;public$y;}$point=new Point();$point->x=5;$point->y=3;echo $point->x.', '.$point->y.'<br>';echo gettype($point).', '.gettype($point->x).'<br>';unset($point);
+	echo '<br>';
+
+	#L2
+	echo('<h3>C4L2: Constructor,deconstructor and method</h3>');
+	class User2{
+		public $name='User';
+		public $email;
+		public function __construct($name='name',$email='mail'){ #construct
+			$this->name=$name; #$this->name is equal to $objectNameOfUser2Class->name outside of class
+			$this->email=$email;
+		}
+		public function getName(){ #any other function is method
+			return $this->name;
+		}
+		public function getEmail(){
+			return $this->email;
+		}
+		public function setName($name){
+			$this->name=$name;
+		}
+		public function setEmail($email){
+			$this->email=$email;
+		}
+		public function __destruct(){ #deconstruct
+			echo 'Deleting object...<br>';
+		}
+	}
+	$user=new User2('Python','31@mail.31');print_r($user);echo '<br>';
+	echo $user->getName().', '.$user->getEmail().'<br>';
+	$user->setName('Gnu');$user->setEmail('39@mail.39');echo $user->getName().', '.$user->getEmail().'<br>';
+	#unset($user); #will summon __destruct()
+	$user=5; #will summon __destruct()
+	echo 'Something...<br>'; #also will summon __destruct() at the end of script if any User2 object will be present at the end
+	echo '<br>';
+	class User22 extends User2{
+		public $x,$y;
+		public function __construct($x,$y){ #new __construct rewrote previous __construct!!
+			$this->x=$x;$this->y=$y;
+		}
+		public function __get($name){
+			if(property_exists($this,$name)) return $this->$name;else return 'No such property!';
+		}
+		public function __set($name, $value){ #when setting new property, it calls 2 times!
+			echo 'value seted: '.$name.'='.$value.'; ';
+			return $this->$name=$value;
+		}
+	}
+	$user=new User22(1,'g');echo $user->__get('x').', '.$user->__get('y').'<br>';
+	$user->__set('r','t');$user->__set('name','6');echo $user->__get('r').', '.$user->__get('name').'<br>';
+	unset($user);
+	echo '<br>';
+
+	#L3
+	echo('<h3>C4L3: Access modificators(public,protected,private)</h3>');
+	class User3{
+		public $id=0; #Can be accessed from anywhere
+		protected $name='User'; #Can be accessed from $this class and child classes
+		private $email; #Can be accessed only from $this class
+		public function __construct($name='name',$email='mail'){
+			$this->name=$name;
+			$this->email=$email;
+			$this->id=$this->getId();
+		}
+		public function getName(){
+			return $this->name;
+		}
+		public function getEmail(){
+			return $this->email;
+		}
+		public function setName($name){
+			$this->name=$name;
+		}
+		public function setEmail($email){
+			$this->email=$email;
+		}
+		public function __destruct(){
+			echo 'Deleting object...<br>';
+		}
+		private function getId(){ #as properties are methods
+			return uniqid();
+		}
+	}
+	$user=new User3();
+	// echo $user->name.'<br>';echo $user->email.'<br>'; #returns fatal error!
+	echo $user->id.', '.$user->getName().'<br>';
+	echo '<br>';
+	// class User33 extends User22{ #Fatal error: Access level to User33::$x must be as in class User22
+	// 	private $x,$y;
+	// }
+	// $user=new User33(1,2);
+	// echo $user->x.'<br>';
+	// echo $user->__get('x').'<br>';
+	unset($user);
+	echo '<br>';
+
+	#L4
+	echo('<h3>C4L4: Static properties and methods</h3>');
+	class Meth{
+		public const PI=3.1415926;
+		private static $counter=0; #objects does not matter for all static, it is same for all objects
+		public static function sin($x){
+			self::$counter++;
+			return sin($x);
+		}
+		public static function pi2(){
+			self::$counter++;
+			return self::PI**2; #self::name is equal to $objectNameOfUserMethClass::name outside of class
+		}
+		public static function getCounter(){
+			return self::$counter;
+		}
+	}
+	echo Meth::sin(5).'<br>';
+	echo Meth::pi2().'<br>';
+	echo Meth::getCounter().'<br>';
+	echo Meth::PI.'<br>';
+	echo '<br>';
+	class Point1 extends Point{
+		static private$count=0;
+		public function __construct($x=false,$y=false){
+			self::$count++; #static does not care about objects!!!
+			$this->x=$x;$this->y=$y;
+		}
+		public static function getObjCount(){
+			return self::$count;
+		}
+	}
+	$p1=new Point1();$p2=new Point1();$p3=new Point1();echo Point1::getObjCount().'<br>';unset($p1,$p2,$p3);
+	echo '<br>';
+
+	#L5
+	echo('<h3>C4L5: Magic methods(__functions)</h3>');
+	class Test{
+		public $x=50;
+	}
+	class Request{
+		public $t;
+		private $data;
+		public function gA(){
+			print_r($this);
+		}
+		public function __construct(Test $t){
+			$this->t=$t;
+			foreach($_REQUEST as $k=>$s) $this->data[$k]=htmlspecialchars($s);
+		}
+		public function __get($name){
+			if(isset($this->data[$name])) return $this->data[$name];return null;
+		}
+		public function __set($name, $value){
+			$this->data[$name]=$value;
+		}
+		public function __isset($name){
+			return isset($this->data[$name]);
+		}
+		public function __toString(){
+			$s='';foreach($this->data as $k=>$v) $s.="$k = $v; ";return $s;
+		}
+		public function __clone(){
+			$this->t=clone $this->t; #if this is not present object Test will be same for every Request object
+		}
+		public function __call($name, $arguments){
+			echo "$name does not exist, thus its realization is impossible!";
+			echo 'Given arguments: '.print_r($arguments,true);
+		}
+		public function __unset($name){
+			unset($this->data[$name]);
+		}
+	}
+	$request=new Request(new Test());echo $request->com.'<br>';$request->gA();echo '<br>';
+	$request->a=5;echo $request->a.'<br>';$request->gA();echo '<br>';
+	echo isset($request->a).'<br>';
+	echo $request.'<br>';
+	$r=$request; #creates hard reference!!!
+	$request->a=8;echo $r->a.'; '.$request->a.'<br>';echo $request.'X '.$r.'<br>';
+	$r=clone $request; #does not create any references, except for inner(recursive classes)!!!
+	$request->a=12;echo $r->a.'; '.$request->a.'<br>';echo $request.'X '.$r.'<br>';
+	echo '<br>--&---------?----------surprise! recursive objects!-------------------------------<br>';
+	echo $request->t->x.' X '.$request->t->x.'<br>';echo $request->gA().$r->gA().'<br>';
+	$request->t->x=15;echo $r->t->x.' X '.$request->t->x.'<br>';echo $request->gA().$r->gA().'<br>';
+	echo '<br>--&---------?----------surprise! calling methods!---------------------------------<br>';
+	echo $request->notFound(1,2,'ag').'<br>';
+	unset($request->a);echo $r->a.'; '.$request->a.'<br>';echo $request.'X '.$r.'<br>';
+	echo '<br>';
+	class Point2 extends Point1{
+		public function __toString(){
+			return "Point with coordinates ($this->x,$this->y)";
+		}
+		public function __get($name){
+			if($name=='z') return $this->d2().'get<br>';if(isset($this->$name)) return $this->$name;return "$name is not set!";
+		}
+		public function __set($name, $value){
+			if($name=='z'){echo $this->d2().'set<br>';return null;}return $this->$name=$value;
+		}
+		public function __call($name, $arguments){
+			if($name=='setZ') echo $this->d2().'call<br>';else echo "calling non-existing method $name in $this object!<br>";echo 'given arguments: '.print_r($arguments,true).'!';
+		}
+		private function d2(){
+			return 'Class Point works only in two dimensions!';
+		}
+	}
+	$p1=new Point2(11,21);$p2=new Point2(12,22);$p3=new Point2(13,23);echo "$p1; $p2; $p3!<br>";
+	$p1->z=3;echo $p1->z.'<br>';$p1->setZ('4');echo '<br>';print_r($p1);echo '<br>';$p4=clone $p1;$p1->x=111;$p4->x=1;echo "$p1; $p4!<br>";unset($p1,$p2,$p3,$p4);
+	echo '<br>';
+
+	#L6
+	echo('<h3>C4L6: Serializing objects</h3>');
+	class User4{
+		private $email;
+		private $password;
+		private $lt;
+		function __construct($email,$password){ #same as public
+			$this->email=$email;
+			$this->password=$password;
+			$this->lt=time();
+		}
+		function __get($name){
+			if(isset($this->$name)) return $this->$name;return null;
+		}
+		function __sleep(){ #does not send password to file on serialization of $this object
+			return ['email','lt'];
+		}
+		function __wakeup(){ #sends new time($lt) on unserialization of $this object's file
+			$this->lt=time();
+		}
+	}
+	$user=new User4('abc@abc.abc','123');print_r($user);echo '<br>';
+	$str=serialize($user);echo $str.'<br>';
+	file_put_contents('res/users/'.$user->email,$str);//sleep(1); #to check magic method __wakeup
+	$str=file_get_contents('res/users/'.$user->email);
+	$u=unserialize($str);print_r($u);
+	echo '<br><br>';
+	$a11=$_POST['a11']??'';$b11=$_POST['b11']??'';$pl='E';
+	if($b11=='Save'){
+		$p=new Point2();
+		if($a11!='') if(preg_match('/x=(\d+)\r\ny=(\d+)/',$a11,$m)){
+			$p->x=$m[1];$p->y=$m[2];
+			file_put_contents('res/xy.num',serialize($p));
+			$pl='Saved successfully!&#10;E';
+		}else $pl='Please retry and &#10;e';$a11='';
+	}elseif($b11=='Load'){
+		if(file_exists('res/xy.num')){
+		$p=unserialize(file_get_contents('res/xy.num'));
+		$a11="x=$p->x\r\ny=$p->y"; #text area have windows new lines!
+		}else $pl='File does not exist!&#10;e';
+	}
+	?>
+	<form name=f11 action=<?=$_SERVER['REQUEST_URI']?> method=post style='background-image:url(res/cat.png);background-repeat:no-repeat;background-position:top center;height:834px;'>
+		<div><textarea name=a11 rows=5 cols=51 style=resize:none placeholder="<?=$pl?>nter x and y properties of Point object as follows:&#10;x=your_number&#10;y=your_number"><?=$a11?></textarea><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domestic cat appeared!</b></div>
+		<div><input type=submit name=b11 value=Load><input type=submit name=b11 value=Save></div><br>
+	</form>
+	<?php
+	echo '<br>';
+
+	#L7
+	echo('<h3>C4L7: Extended and abstract classes</h3>');
+	abstract class Shape{
+		protected $x;
+		protected $y;
+		abstract function draw(); #abstract methods needs to be realized in all child classes!!!
+		function __construct($x,$y){
+			$this->x=$x;
+			$this->y=$y;
+		}
+		function __toString(){
+			return print_r($this,true).'<br>';
+		}
+	}
+	class Circle extends Shape{
+		private $r;
+		function __construct($x,$y,$r){
+			parent::__construct($x,$y);
+			$this->r=$r;
+		}
+		function draw(){
+			echo "Drawing circle with center in ($this->x,$this->y)! Radius is $this->r.<br>";
+		}
+	}
+	class Rectangle extends Shape{
+		private $w,$h;
+		function __construct($x,$y,$w,$h){
+			parent::__construct($x,$y);
+			$this->w=$w;
+			$this->h=$h;
+		}
+		function draw(){
+			echo "Drawing rectangle with left top angle in ($this->x,$this->y)! Width is $this->w, height is $this->h.<br>";
+		}
+	}
+	$circle=new Circle(5,8,10);$rectangle=new Rectangle(20,20,40,10);
+	echo $rectangle->draw().$circle->draw(); #example of polymorphism or metamorphic code!!!
+	echo $rectangle.$circle;
+	// $shape=new Shape(1,2); #Throws fatal, cannot instantiate abstract class!
+	$r=new Rectangle(210,220,430,102);$list=[$circle,$rectangle,$r];foreach($list as $l) $l->draw();
+	// foreach($list as $l) if($l instanceof Circle) $l->drawCircle();elseif(...) ...; #if each class had different draw methods!!!
+	echo '<br>';
+	class pointS extends Shape{
+		public $x,$y;
+		function draw(){
+			echo "Drawing point with coordinates ($this->x,$this->y).<br>";
+		}
+	}
+	$p=new pointS(1,2);$p->draw();
+	echo '<br>';
+
+	#L8
+	echo('<h3>C4L8: Interfaces</h3>');
+	interface mark{
+		function mark();
+	}
+	interface mark1{ #can be implemented multiple interfaces simultaniously in one class, unlike classes, that can not be extended like that!!!
+		function mark1();
+	}
+	class Shape1 extends Shape implements mark,mark1{ #there are no difference between $this class and abstract $this class, except we will not be able to instantiate it later!!!
+		function draw(){
+			echo 'Drawing shapeless shape...<br>';
+		}
+		function mark(){
+			echo 'Marked interfaced object!<br>';
+		}
+		function mark1(){}
+	}
+	$s=new Shape1(null,null);$s->draw();$s->mark();$s->mark1();
+	echo '<br>';
+	interface CanMove{function move();}interface CanFly{function fly();}class Car implements CanMove{function move(){echo 'Movement of car.<br>';}}class Aircraft implements CanFly{function fly(){echo 'Flight of airplane.<br>';}}
+	$c=new Car();$c->move();$a=new Aircraft();$a->fly(); 
+	echo '<br>';
+
+	#L9
+	echo('<h3>C4L9: Traits</h3>');
+	trait Id{ #same as abstract classes, but can be used multiple times in one class, unlike classes!!!(only used in classes(for now for me))
+		protected $id;
+		function getId(){
+			return $this->id;
+		}
+		function setId($id){
+			$this->id=$id;
+		}
+	}
+	trait Name{
+		protected $name;
+		function getName(){
+			return $this->name;
+		}
+		function setName($name){
+			$this->name=$name;
+		}
+	}
+	class User5{use Id,Name;}
+	$user=new User5();$user->setId(31);$user->setName('Python');
+	echo $user->getId().', '.$user->getName().'<br>'; #does not work in "" as variables!!!
+	// $n=new Name();$n->setName('seth');echo $n->getName(); #does not work, see above of above comment!!!
+	// class Cat{use Id,Name;} #very convenient
+	echo '<br>';
+	trait CanMove1{function move(){echo 'Movement of car.<br>';}}trait CanFly1{function fly(){echo 'Flight of airplane.<br>';}}class Car1{use CanMove1;}class Aircraft1{use CanFly1;}
+	$c1=new Car1();$c1->move();$a1=new Aircraft1();$a1->fly();
+	echo '<br>';
+
+	#L10
+	echo('<h3>C4L10: Namespaces</h3>'); #Try to make unique domain names like in web!!!
+	require_once 'res/php/a.php';require_once 'b.php'; #works same!!!Because test,a,b php files in the same directory res!
+	#(stop using character !)
+	use a\User as Usera; #like directories in windows, but namespaces
+	// use b\User as Userb;
+	$usera=new Usera();
+	$usera->name='Elephant';echo $usera->name.'<br>';
+	$userb=new b\User();
+	$userb->id='28';echo $userb->id.'<br>';
+	echo '<br>';
+	require_once('Car');require_once('Aircraft');use car\Car as move;
+	$car=new move();$car->move();$aircraft=new aircraft\Aircraft();$aircraft->fly();
+	echo '<br>';
+
+	#L11
+	echo('<h3>C4L11: Import and autoload classes</h3>');
+	// require_once('lib/user_class.php');require_once('lib/point_class.php'); #is not good when working with thousands of such files
+	// function autoload($classname){ #__autoload() is deprecated, but i made similar function, used in spl_autoload_register()
+	// 	require_once "lib/{$classname}_class.php";
+	// }spl_autoload_register('autoload');
+	// echo get_include_path().'<br>'.PATH_SEPARATOR.'<br>';
+	set_include_path(get_include_path().PATH_SEPARATOR.'lib');spl_autoload_extensions(spl_autoload_extensions().',_class.php');spl_autoload_register(); #or you can use this 3 functions, works only together!!
+	$user=new User();echo $user->name.'<br>';
+	$point=new PointClass();echo $point->x.'<br>'; #gives fatal error if Class name is different than name of file without extension!!!!
+	echo '<br>';
+	echo 'I\'m sorry Dave, I\'m afraid i can\'t do that<br>';
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+	// spl_autoload_unregister(); #Unregister given function as __autoload() implementation
+?>
+
+
+<h1>Chapter 5: Handling errors</h1>
+<?php
+
+	#L1
+	echo('<h3>C5L1: E_ types and error_reporting()</h3>');
+	// E_ERROR(id=1 for .htaccess file), E_WARNING(2), E_PARSE(4), E_NOTICE(8), E_CORE_ERROR(16), E_CORE_WARNING(32), E_COMPILE_ERROR(64), E_COMPILE_WARNING(128), E_USER_ERROR(256), E_USER_WARNING(512), E_USER_NOTICE(1024), E_STRICT(2048), E_RECOVERABLE_ERROR(4096), E_DEPRECATED(8192), E_USER_DEPRECATED(16384), E_ALL(32767)
+	// error_reporting(32767); #ignored because of htaccess!
+	echo '<br>';
+
+	#L2
+	echo('<h3>C5L2: @ operator</h3>');
+	$handler=@fopen('a.txt','r');if(!$handler) echo 'ERROR: File is not found!<br>';
+	if(!empty($_REQUEST['myf'])) echo 'Form sent!<br>'; #empty() is like isset() but also checks for null value!
+	if(@$_REQUEST['myf']) echo 'Form sent!<br>'; #@ can also do that, but have resource consumption issues
+	?>
+	<form name=myf action=<?=$_SERVER['REQUEST_URI']?> method=post>
+		<div><input type=submit name=myf value=Send></div>
+	</form>
+	<?php
+	echo '<br>';
+	$a=@$b;
+	echo '<br>';
+
+	#L3
+	echo('<h3>C5L3: try-catch-finally operator</h3>');
+	try{
+		$email='abc@mail.abc';
+		if(false) throw new Exception('Message');
+		echo 'Verification passed successfully!<br>';
+	}catch(Exception $e){
+		echo 'Error is created: '.$e->getMessage().'<br>';
+	}finally{
+		echo'Finally end.<br>';
+	}
+	class U{
+		private $name;
+		function setName($name){
+			if(!$name) throw new Exception('Invalid name');
+			$this->name=$name;
+		}
+	}
+	print_r($e);
+	$user=new U();$user->setName('Elephant');try{$user->setName('');}catch(Exception $e){echo 'Error threw: '.$e->getMessage().'<br>';} #when catchig exceptions with variable it will stay in that variable and this is saddening me
+	echo print_r($e,1);
+	echo '<br>';
+	class Valid{
+		static function validEmail($email){
+			if($email=='') throw new Exception('Empty mail.<br>');
+			if(!preg_match('/^[a-z0-9_]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z]*\.)+([a-z]{2,4})$/i',$email)) throw new Exception('Mail is invalid.<br>');
+			if(strlen($email)>255) throw new Exception('Mail is too long.<br>');
+			return true;
+		}
+	}
+	try{
+		Valid::validEmail('hjuhat@fgh.sd'); 
+		echo 'Mail is valid!<br>';
+	}catch(Exception $e){
+		echo 'Error is: '.$e->getMessage();
+	}
+	echo '<br>';
+
+	echo('<h3>Wild file transfer appared!</h3>');
+	// $file='res/cat.png';
+	// header('Content-Type: application/octet-stream');
+	// header('Content-Transfer-Encoding: Binary');
+	// header('Content-disposition: attachment; filename=\''.basename($file).'\'');
+	// readfile($file); #above line should be ob_clean(); flush();
+	// if (file_exists($file)) {
+	// 	header('Content-Description: File Transfer');
+	// 	header('Content-Type: application/octet-stream');
+	// 	header('Content-Disposition: attachment; filename="'.basename($file).'"');
+	// 	header('Expires: 0');
+	// 	header('Cache-Control: must-revalidate');
+	// 	header('Pragma: public');
+	// 	header('Content-Length: ' . filesize($file));
+	// 	readfile($file);
+	// 	exit;
+	// }
+	echo('<br>');
+
+	#L4
+	echo('<h3>C5L4: Exception class</h3>');
+	try{throw new Exception('Error message<br>',1);}catch(Exception $e){echo $e->getMessage();echo $e->getCode().'<br>';echo $e->getFile().'<br>';echo $e->getLine().'<br>';echo print_r($e->getTrace(),true).'<br>';echo $e->getTraceAsString().'<br>';}
+	function test1(){throw new Exception('Error message: ',2);}function test2(){test1();}
+	try{test2();}catch(Exception $e){print_r($e->getTrace());}echo '<br>';
+	class FileException extends Exception{}
+	class NameException extends Exception{}
+	// class NameException extends Exception{function __construct(int $code){parent::__construct('',$code);}}
+	try{
+		$name='';
+		$file='a.txt';
+		if(!$name) throw new NameException('Empty name',1);
+		if(!file_exists($file)) throw new FileException('File does not exists',1);
+	}catch(Exception $e){ #catch parent class to show childs
+		if($e instanceof NameException) echo 'Name exception!<br>';
+		elseif($e instanceof FileException) echo 'File exception!<br>';
+		echo $e->getMessage();
+	}
+	echo '<br>';
+	class EmptyException extends Exception{}class LongException extends Exception{}class InvalidException extends Exception{}class Valid1{static function validEmail($email){if($email=='') throw new EmptyException('Empty mail.<br>');if(!preg_match('/^[a-z0-9_]+(\.[a-z0-9_-]+)*@([0-9a-z][0-9a-z]*\.)+([a-z]{2,4})$/i',$email)) throw new InvalidException('Mail is invalid.<br>');if(strlen($email)>255) throw new LongException('Mail is too long.<br>');return true;}}try{Valid1::validEmail('s@s.sd');echo 'Mail is valid!<br>';}catch(Exception $e){if($e instanceof EmptyException) echo 'Empty exception: '.$e->getMessage();elseif($e instanceof InvalidException) echo 'Invalid exception: '.$e->getMessage();elseif($e instanceof LongException) echo 'Long exception: '.$e->getMessage();else echo 'Unrecognized exception: '.$e->getMessage();}
+	echo '<br>';
+
+	#L5
+	echo('<h3>C5L5: Error class</h3>');
+	try{
+		// $x=5/0;
+		// $str='Hi';$str[]=2;
+		// echo intdiv(PHP_INT_MIN,-1);
+		// eval('5+\''); #eval() Evaluates string as PHP code!!!DANGEROUS!!!
+		// assert(true==false,'NO'); #AssertionError assert(), i dont know how it works yet
+	}catch(Error $e){
+		echo $e.'<br>';
+	}
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<h1>Chapter 6: Standart classes in php</h1>
+<?php
+
+	#L1
+	echo('<h3>C6L1: Classes to handle date and time</h3>');
+	$date=new DateTime();echo $date->format('d.m.Y H:i:s').'<br>';
+	$date=new DateTime('1968-01-01 13:03:30');echo $date->format('d.m.Y H:i:s').'<br>';
+	$date->setDate(1888,1,1/*minimum normal date*/);$date->setTime(15,11,20);echo $date->format('d.m.Y H:i:s').'<br>';
+	$date->setTimezone(new DateTimeZone('Asia/Tokyo'));echo $date->format('d.m.Y H:i:s').'<br>';
+	echo $date->getTimezone()->getOffset($date).'<br>';
+	$date1=new DateTime();$date2=new DateTime('1968-01-01 13:03:30');$interval=$date2->diff($date1);echo print_r($interval,1).'<br>';echo $interval->days.'<br>';
+	$interval=new DateInterval('P2Y1M5DT5H10M15S');$date1->add($interval);echo $date1->format('d.m.Y H:i:s').'<br>';
+	$interval=new DateInterval('PT1H');$date=new DateTime();$period=new DatePeriod($date,$interval,20);foreach($period as $datetime) echo $datetime->format('d.m.Y H:i:s').'<br>';
+	echo '<br>';
+	$y1=mt_rand(0,10000);$m1=mt_rand(1,12);$d1=mt_rand(1,31);$h1=mt_rand(0,23);$i1=mt_rand(0,59);$s1=mt_rand(0,59);$y2=mt_rand(0,10000);$m2=mt_rand(1,12);$d2=mt_rand(1,31);$h2=mt_rand(0,23);$i2=mt_rand(0,59);$s2=mt_rand(0,59);$d1=new DateTime("$y1-$m1-$d1 $h1:$i1:$s1");echo $d1->format('Y.m.d H:i:s').'<br>';$d2=new DateTime("$y1-$m1-$d2 $h2:$i2:$s2");echo $d2->format('Y.m.d H:i:s').'<br>';$i=$d2->diff($d1);echo 'Days: '.$i->days.'. Hours: '.$i->h.'. Minutes: '.$i->i.'. Seconds: '.$i->s.'<br>';foreach(new DatePeriod($d1,new DateInterval('P1D'),$d2) as $d) echo $d->format('Y.m.d H:i:s').', ';
+	echo '<br>';
+
+	#L2
+	echo('<h3>C6L2: Iterators</h3>');
+	class Test1{public $x=5,$y=8;private $z=10;protected $pr=-5;}
+	// class MyArray implements Iterator{
+	// 	private $arr=['Name'=>'Elephant','age'=>'28','BirthSeason'=>'fall 1994'];
+	// 	function current(){return current($this->arr);}
+	// 	function key(){return key($this->arr);}
+	// 	function next(){return next($this->arr);}
+	// 	function rewind(){reset($this->arr);}
+	// 	function valid(){$key=key($this->arr);return ($key!==null&&$key!==false);}
+	// } #Throws Deprecated warnings!!!
+	$test=new Test1();foreach($test as $k=>$v) echo "$k = $v; ";echo '<br>';
+	// $arr=new MyArray();foreach($arr as $k=>$v) echo $k.' = '.$v.'; ';echo '<br>';
+	$dir=new DirectoryIterator('./');foreach($dir as $f){echo $f->getFilename();if($f->isFile()) echo '('.$f->getSize().')';echo '; ';}echo '<br>';
+	echo '<br>';
+	class MyArray implements Iterator{
+		private $position, $list;
+		function __construct($list=['Elephant','28','fall 1994']){
+			$this->position=0;
+			$this->list=$list;
+		}
+		function rewind():void{
+			$this->position=0;
+		}
+		function current():mixed{
+			return $this->list[$this->position];
+		}
+		function key():mixed{
+			return $this->position;
+		}
+		function next():void{
+			++$this->position;
+		}
+		function valid():bool{
+			return isset($this->list[$this->position]);
+		}
+	}
+	$arr=new MyArray();foreach($arr as $v) echo $v.'; ';echo '<br>';
+	echo '<br>';
+
+	#L3
+	echo('<h3>C6L3: Virtual arrays(ArrayAccess)</h3>');
+	class MyArray1 implements ArrayAccess{
+		protected $array=[];
+		function offsetExists($offset): bool{
+			return isset($this->array[$offset]);
+		}
+		function offsetGet($offset): mixed{
+			return $this->array[$offset];
+		}
+		function offsetSet($offset, $value): void{
+			$this->array[$offset]=$value;
+		}
+		function offsetUnset($offset): void{
+			unset($this->array[$offset]);
+		}
+	}
+	$a=new MyArray1();$a['Name']='Elephant';$a['Age']=28;echo $a['Name'].' - '.$a['Age'].'<br>';echo isset($a['Name']).'!<br>';
+	unset($a['Name']);echo isset($a['Name']).'!<br>';
+	echo '<br>';
+	class MyArray2 extends MyArray1{
+		function offsetGet($offset): mixed{
+			return isset($this->array[$offset])?$this->array[$offset]:null;
+		}
+		function offsetSet($offset, $value): void{
+			if(is_null($offset)) $this->array[]=$value;
+			else $this->array[$offset]=$value;
+		}
+	}
+	$a=new MyArray2();for($i=0;$i<12;$i++) $a[]=$i*2;
+	$b=new MyArray($a);foreach($b as $v) echo $v.'; ';echo '<br>';
+	echo '<br>';
+
+	#L4
+	echo('<h3>C6L4: Directory class</h3>');
+	$dir=dir('./');print_r($dir);echo '<br>';
+	while(($f=$dir->read())!==false) echo $f.'; ';echo '<br>';
+	$dir->rewind();
+	while(($f=$dir->read())!==false) echo $f.'; ';echo '<br>';
+	$dir->close();
+	echo '<br>';
+	function d($d){
+		$dir=dir($d);$tab='&nbsp;&nbsp;';
+		while(($f=$dir->read())!==false) if($f!=='.'&&$f!=='..') 
+		if(is_dir($d.'/'.$f)){echo $tab.$d.'/'.$f.'/<br>';d($d.'/'.$f);}else echo $tab.$d.'/'.$f.'<br>';
+		$dir->close();
+	}
+	d('..'); #Throws fatal if www-data does not have permission to this directory!
+	echo '<br>';
+
+	#L5
+	echo('<h3>C6L5: Generator class</h3>');
+	function test3($from,$to){for($i=$from;$i<=$to;$i++){$cmd=yield $i;if($cmd==-1) return 'Command send.';}return $to-$from;}
+	$t=test3(1,5);print_r($t);echo '<br>';
+	foreach($t as $v) echo $v.'; ';echo '<br>';
+	// $t->rewind(); #Cannot rewind generator objects!
+	$t=test3(1,5);
+	while($t->valid()){echo $t->current().'; ';if($t->current()==2) $t->send(-1);$t->next();}echo '<br>';
+	echo $t->getReturn();echo '<br>';
+	echo '<br>';
+	function g($start,$to,$step){
+		for($i=$start;$i<$to;$i+=$step){$c=yield $i;if($c!==null) $step=$c;}
+	}
+	$g=g(1,11,3);while($g->valid()){echo $g->current().'; ';$g->next();}echo '<br>';
+	$g=g(1,11,3);while($g->valid()){echo $g->current().'; ';$g->send(1);}echo '<br>';
+	echo '<br>';
+
+	#L6
+	echo('<h3>C6L6: IntlChar class</h3>'); #sudo apt install php-intl
+	echo IntlChar::ord('!').'<br>'; #returns decimal value of charcter
+	echo IntlChar::chr(1070).'<br>';
+	echo IntlChar::isalnum('a').'<br>';echo IntlChar::isalpha('a').'<br>';echo IntlChar::ispunct(',').'<br>';echo IntlChar::isspace(' ').'<br>';echo IntlChar::islower('l').'<br>';echo IntlChar::isupper('L').'<br>'; #is methods
+	echo '<br>';
+	echo '<table style=\'border:1px solid black;text-align:center;\'><tr><th style=\'border:1px solid black;\'>Code of character</th><th style=\'border:1px solid black;\'>Character</th></tr>';
+	// for($i=0;$i<70000;$i++) echo '<tr><td style=\'border:1px solid black;\'>'.$i.'</td><td style=\'border:1px solid black;\'>'.IntlChar::chr($i).'</td></tr>'; #too much
+	echo '</table>';
+	echo '<br>';
+
+	#L7
+	echo('<h3>C6L7: Reflection class</h3>'); #for pure knowledge, in java there is similar thing called javadoc
+	$obj='DateTime';$obj=new $obj();
+	if($obj instanceof DateTime) echo $obj->format('Y.m.d H:i:s').'<br>';
+	final class Test4{public$x=0;final function x(){}}
+	$rc=new ReflectionClass('Test4');echo '<pre>'.htmlentities($rc).'</pre><br>';
+	echo $rc->getStartLine().', '.$rc->getEndLine().', '.$rc->getProperty('x').'<br>';
+	echo print_r($rc->getProperty('x'),1).'<br>';
+	echo print_r($rc->getMethod('x')->isFinal(),1).'<br>';
+	echo '<br>';
+	class Point3{private $x,$y;private function __construct(){}private function getX(){}private function getY(){}private function setX($x){}private function setY($y,$x){}}
+	$r=new ReflectionClass('Point3');$p=$r->getProperties();$m=$r->getMethods();echo 'Name: '.print_r($r->getName(),1).'.<br>Properties: ';foreach($p as $n){echo $n->getName();if($n!=end($p)) echo ', ';else echo '.';}echo '<br>Methods: ';foreach($m as $n) if(!preg_match('/^__.*/',$n->getName())){echo $n->getName().'(';$pa=$n->getParameters();foreach($pa as $n1){echo '$'.$n1->getName();if($n1!=end($pa)) echo ', ';}if($n!=end($m)) echo '), ';else echo ').';}echo '<br>'; #Alert! First usage of end() function!
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<h1>Chapter 7: Web functions in php</h1>
+<a href=res/php/index2.php><h2>New headers needed to be sent!</h2></a>
+
+
+<h1>Chapter 8: PHP modules</h1>
+<?php
+
+	#L1
+	echo('<h3>C8L1: filter_var($var, FILTER_VALIDATE_...) function</h3>');
+	// echo !filter_var('abc@abc.abc',FILTER_VALIDATE_EMAIL);
+	class Valid2{
+		static function validEmail($email){
+			if(!filter_var($email,FILTER_VALIDATE_EMAIL)) throw new Exception('exception_m');
+			else return true;
+		}
+		static function validURL($url){
+			if(!filter_var($url,FILTER_VALIDATE_URL)) throw new Exception('exception_u');
+			else return true;
+		}
+	}
+	try{Valid2::validURL('http://google.com');echo 'Validation passed!';}catch(Exception $e){echo $e->getMessage();}
+	echo '<br>';
+
+	#L2
+	echo('<h3>C8L2: work with images: part 1 (module php-gd)</h3><a href=lib/C8L2.php><h3>script with headers</h3></a>'); #for this to work module php-gd is needed!!!
+
+	#L3
+	echo('<h3>C8L3: work with images: part 2</h3><a href=lib/C8L3.php><h3>script with headers</h3></a>'); #for this to work module php-gd is needed!!!
+
+	#L4
+	echo('<h3>C8L4: work with images: part 3</h3><a href=lib/C8L4.php><h3>script with headers</h3></a><a href=lib/C8L4(w).php><h3>script with headers (hardcore captcha)</h3></a></h3>');
+
+	#L5
+	echo('<h3>C8L5: </h3>');
+	$ch=curl_init('http://localhost/lib/C8L5.php');
+	// curl_setopt($ch,CURLOPT_HEADER,true);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+	curl_setopt($ch,CURLOPT_POST,true);
+	curl_setopt($ch,CURLOPT_REFERER,'ashufuw.nothere'); #thus do not trust $_SERVER['REFERER']!!!
+	curl_setopt($ch,CURLOPT_COOKIE,'login=Admin;password=123'); #those cookie are not saved in clients browser!!!
+	curl_setopt($ch,CURLOPT_POSTFIELDS,'x=5&y=17');
+	$result=curl_exec($ch);echo $result.'<br>';
+	curl_close($ch);
+	// $ch=curl_init('https://google.com'); #commented because of my quantum internet
+	// curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
+	// curl_setopt($ch,CURLOPT_HEADER,true);
+	// curl_setopt($ch,CURLOPT_NOBODY,true);
+	// curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,true);
+	// curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+	// $result=curl_exec($ch);echo $result.'<br><br>';
+	// curl_close($ch);
+	// preg_match('/set-cookie:\sNID=(.*?);/i',$result,$matches);echo $matches[1];echo '<br>'; #Yanking cookies from other websites, second comment is set-cookie: can be also Set-Cookie:, thus i modifier
+	echo '<br>';
+	echo '<a href=res/php/curl_hunter.php><h3>CURL Hunter</h3></a>';
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<h1>Chapter 9: DataBase & MySQL</h1>
+<a href=https://dev.mysql.com/doc/refman/8.0/en/><h2>Manual</h2></a>
+<?php
+	
+	#L1
+	echo('<h3>C9L1: Creation of DB, tables and columns(module php-mysqli)</h3>');
+	$db=new mysqli('localhost','php','pwd'); #created this user in instalation script
+	if($db->connect_errno) exit('Error connecting to DB.');
+	// $db->real_query('DROP DATABASE db1');
+	try{$db->real_query('CREATE DATABASE db1;');}catch(Exception $e){echo $db->error.'<br>';}
+	$db->query('USE db1;');
+	// $db->query('SHOW TABLES;'); #does not output anything from mysql terminal
+	try{$db->query('CREATE TABLE secret_users(
+		id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		name VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+		email VARCHAR(255) COLLATE utf8_general_ci NOT NULL UNIQUE KEY,
+		password CHAR(60) COLLATE utf8_general_ci NOT NULL,
+		date_reg INT(10) UNSIGNED NOT NULL
+	) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+	');} #UNSIGNED converts fields type from -128...127 to 0...255
+	catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	$q = $db->query('DESCRIBE secret_users;');
+	while($row = mysqli_fetch_array($q)) {
+		foreach($row as $k=>$v) echo "$k => $v | ";
+	}echo '<br><br>'; #did output something from mysql terminal
+
+	#Collation usage with case sensitive example(source: https://stackoverflow.com/questions/26176370/why-does-filtering-on-a-range-match-the-wrong-case-when-using-a-case-sensitive-c):
+	// DECLARE @test TABLE (string VARCHAR(30)
+	// COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL);
+	// INSERT INTO @test (string) values ('A');
+	// INSERT INTO @test (string) values ('B');
+	// INSERT INTO @test (string) values ('Y');
+	// INSERT INTO @test (string) values ('Z');
+	// INSERT INTO @test (string) values ('a');
+	// INSERT INTO @test (string) values ('b');
+	// INSERT INTO @test (string) values ('y');
+	// INSERT INTO @test (string) values ('z');
+
+	// -- case-sensitive, dictionary ordered sorting via column collation
+	// SELECT [string] AS [Test1] FROM @test ORDER BY string ASC;
+	// /* -- upper-case and lower-case of each letter are grouped together;
+	// -- upper-case consistently comes first due to case-sensitive
+	// A
+	// a
+	// B
+	// b
+	// Y
+	// y
+	// Z
+	// z
+	// */
+
+	// -- case-sensitive comparison via column collation
+	// SELECT [string] AS [Test2] FROM @test WHERE string = 'Y';
+	// /* -- equality is straight-forward when using case-sensitive comparison
+	// Y
+	// */
+
+	// -- case-sensitive, dictionary ordered comparison and sorting via column collation
+	// SELECT [string] AS [Test3] FROM @test WHERE string >= 'Y' ORDER BY string ASC;
+	// /*  -- upper-case comes first due to case-sensitive
+	// Y
+	// y
+	// Z
+	// z
+	// */
+
+	// -- case-sensitive, dictionary ordered comparison and sorting via column collation
+	// SELECT [string] AS [Test4] FROM @test WHERE string >= 'y' ORDER BY string ASC;
+	// /* -- upper-case comes first due to case-sensitive
+	// y
+	// Z
+	// z
+	// */
+
+	// -- case-insensitive, dictionary ordered comparison via collation override
+	// SELECT [string] AS [Test5] FROM @test
+	// WHERE string > 'Y' COLLATE SQL_Latin1_General_CP1_CI_AS;
+	// /* -- upper-case and lower-case are the same due to case-INsensitive
+	// Z
+	// z
+	// */
+
+	// -- binary ordering via collation override
+	// SELECT [string] AS [Test6] FROM @test ORDER BY string COLLATE Latin1_General_BIN ASC;
+	// /*
+	// A
+	// B
+	// Y
+	// Z
+	// a
+	// b
+	// y
+	// z
+	// */
+
+	// -- case-sensitive, dictionary ordered comparison via column collation;
+	// -- binary ordering via collation override
+	// SELECT [string] AS [Test7] FROM @test WHERE string >= 'y'
+	// ORDER BY string COLLATE Latin1_General_BIN ASC;
+	// /* -- lower-case 'y' comes before both 'Z' and 'z' when using a dictionary comparison
+	// Z
+	// y
+	// z
+	// */
+
+	// -- binary comparison via collation override;
+	// -- binary ordering via collation override
+	// SELECT [string] AS [Test8] FROM @test WHERE string >= 'y' COLLATE Latin1_General_BIN
+	// ORDER BY string COLLATE Latin1_General_BIN ASC;
+	// /* -- lower-case 'y' comes after all capitals when using a binary comparison
+	// y
+	// z
+	// */
+
+	// -- case-insensitive, dictionary ordered sorting via collation override
+	// SELECT [string] AS [Test9] FROM @test
+	// ORDER BY string COLLATE SQL_Latin1_General_CP1_CI_AS ASC;
+	// /* -- upper-case and lower-case of each letter are grouped together,
+	// -- but inconsistent for upper-case vs lower-case first
+	// A
+	// a
+	// b
+	// B
+	// Y
+	// y
+	// z
+	// Z
+	// */
+	#End of example.
+
+	try{$db->query('CREATE TABLE secret_articles(
+		id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		user_id INT(10) UNSIGNED NOT NULL,
+		title VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+		text TEXT COLLATE utf8_general_ci NOT NULL,
+		date INT(10) UNSIGNED NOT NULL
+	) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+	');}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+	$db->query("INSERT INTO secret_users (id,name,email,password,date_reg) VALUES(NULL,'Python','python@mail.mail','".password_hash('123456',PASSWORD_BCRYPT)."',UNIX_TIMESTAMP())");
+	$db->query("INSERT INTO secret_users (id,name,email,password,date_reg) VALUES(NULL,'GNU','gnu@mail.mail','".password_hash('123',PASSWORD_BCRYPT)."',UNIX_TIMESTAMP())");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+		$db->query("INSERT INTO secret_articles (id,user_id,title,text,date) VALUES(NULL,'2','His first article','Text of first article...',UNIX_TIMESTAMP())");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+		$db->query("INSERT INTO secret_articles (id,user_id,title,text,date) VALUES(NULL,'1','Snakes first article','Text of this snakes article...',UNIX_TIMESTAMP())");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+		$db->query("ALTER TABLE secret_articles MODIFY date INT(10) UNSIGNED NOT NULL");
+		$db->query("ALTER TABLE secret_articles RENAME COLUMN date TO date1");
+		$db->query("UPDATE secret_articles SET text='Text of cows first redacted article...', title='Cows first redacted article' WHERE user_id='2'");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+		// $db->query("ALTER TABLE secret_articles DROP COLUMN hide");
+		$db->query("ALTER TABLE secret_articles ADD hide TINYINT(1) UNSIGNED DEFAULT 0 NOT NULL AFTER date1");
+		$db->query("UPDATE secret_articles SET hide='1' WHERE user_id='1'");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>'; #DEFAULT should be last property or at least after type of variable!!!
+
+	try{
+		$db->query("ALTER TABLE secret_users ADD ip_reg BIGINT(20) NOT NULL AFTER password");
+		$db->query("ALTER TABLE secret_users ADD balance DOUBLE(10,2) UNSIGNED DEFAULT 0 NOT NULL AFTER password");
+		// $db->query("UPDATE secret_users SET ip_reg='' WHERE id='2'");
+		$db->query("UPDATE secret_users SET balance='5.20' WHERE id='2'");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	$result = $db->query('SELECT * FROM secret_users');
+	echo '<table border=1><tr><th>id</th><th>name</th><th>email</th><th>password</th><th>balance</th><th>ip_reg</th><th>date_reg</th></tr>';
+	while($row=mysqli_fetch_array($result)) echo '<tr><td>'.$row['id'].'</td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['password'].'</td><td>'.$row['balance'].'</td><td>'.$row['ip_reg'].'</td><td>'.$row['date_reg'].'</td></tr>';echo '</table>';
+
+	$result = $db->query('SELECT * FROM secret_articles');
+	echo '<table border=1><tr><th>id</th><th>user_id</th><th>title</th><th>text</th><th>date</th></tr>';
+	while($row=mysqli_fetch_array($result)) echo '<tr><td>'.$row['id'].'</td><td>'.$row['user_id'].'</td><td>'.$row['title'].'</td><td>'.$row['text'].'</td><td>'.$row['date1'].'</td></tr>';echo '</table>';
+
+	try{$db->query('CREATE TABLE secret_timezones(
+		id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		title VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+		offset INT(10) NOT NULL
+	) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+	');}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	try{
+		$db->query("INSERT INTO secret_timezones (id,title,offset) VALUES(NULL,'Russia/Moscow','10800')");
+		$db->query("INSERT INTO secret_timezones (id,title,offset) VALUES(NULL,'West Greenland Time','-14400')");
+		$db->query("INSERT INTO secret_timezones (id,title,offset) VALUES(NULL,'Australian Eastern Standart Time','32400')");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+
+	$result = $db->query('SELECT * FROM secret_timezones');
+	echo '<table border=1><tr><th>id</th><th>title</th><th>offset</th></tr>';
+	while($row=mysqli_fetch_array($result)) echo '<tr><td>'.$row['id'].'</td><td>'.$row['title'].'</td><td>'.$row['offset'].'</td></tr>';echo '</table>';
+	echo '<br>';
+
+	#L2
+	echo('<h3>C9L2: Keys</h3>');
+	try{
+		// $db->query("DROP TABLE secret_timezones");
+		// $db->query("ALTER TABLE secret_timezones ADD UNIQUE KEY(offset)");
+	}catch(Exception $e){echo $db->error.'<br>';}echo '<br>';
+	echo '<br>';
+
+	#L3
+	echo('<h3>C9L3: Import and export of DB(mysqldump)</h3>'); #sudo sh -c "mysqldump -uphp -ppwd db1 > /var/www/html/res/db.sql" OR tou can do this from php www-data user with command: mysqldump -uphp -ppwd db1 > res/db.sql
+?>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>&emsp;&emsp;<input type=submit value='export db1' name=dbx>&emsp;&emsp;<input type=submit value='import mysite' name=dbi>&emsp;&emsp;<input type=submit value='drop db1' name=dbd1>&emsp;&emsp;<input type=submit value='drop mysite' name=dbd2></form>
+<?php
+	if(isset($_POST['dbx'])) exec('mysqldump -uphp -ppwd db1 > res/db1.sql');
+	if(isset($_POST['dbi'])) try{$db->query('CREATE DATABASE mysite');exec('mysql -uphp -ppwd mysite < res/mysite.sql');}catch(Exception $e){echo $e;}
+	if(isset($_POST['dbd1'])) try{$db->query("DROP DATABASE db1");}catch(Exception $e){echo $e;}
+	if(isset($_POST['dbd2'])) try{$db->query("DROP DATABASE mysite");}catch(Exception $e){echo $e;}
+	$db->query('USE mysite');
+	$result = $db->query('SELECT * FROM secret_users');
+	echo '<table border=1><tr><th>id</th><th>name</th><th>email</th><th>password</th><th>balance</th><th>ip_reg</th><th>date_reg</th></tr>';
+	while($row=mysqli_fetch_array($result)) echo '<tr><td>'.$row['id'].'</td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['password'].'</td><td>'.$row['balance'].'</td><td>'.$row['ip_reg'].'</td><td>'.$row['date_reg'].'</td></tr>';echo '</table>';
+	$result = $db->query('SELECT * FROM secret_articles');
+	echo '<table border=1><tr><th>id</th><th>user_id</th><th>title</th><th>text</th><th>date</th></tr>';
+	while($row=mysqli_fetch_array($result)) echo '<tr><td>'.$row['id'].'</td><td>'.$row['user_id'].'</td><td>'.$row['title'].'</td><td>'.$row['text'].'</td><td>'.$row['date'].'</td></tr>';echo '</table>';
+	echo '<br>';
+
+	#L4
+	echo('<h3>C9L4: All above :)</h3>');
+	define('DB_HOST','localhost');define('DB_USER','php');define('DB_PASSWORD','pwd');define('DB_NAME','mysite'); #can be done
+	$db->set_charset('utf8');
+	try{$db=new mysqli(DB_HOST,DB_USER,DB_PASSWORD,'DB_NAME1');echo 'Connected to database successfully!';}catch(Exception $e){echo 'Cannot connect to database!';}
+	echo '<br>';
+
+	#L5
+	echo('<h3>C9L5: Already in use</h3>');
+	echo '<br>';
+
+	#L6
+	echo('<h3>C9L6: Same</h3>'); #can work with db without query use db: `db`.`table` . Also use `` with variables instead of '', but keep values of those variables in '' !!!!!!!!!! (INSERT INTO `secret_timezones` (`id`,`title`,`offset`) VALUES(NULL,'West Greenland Time','-14400'))
+	try{$db->query('CREATE TABLE `mysite`.`secret_test`(
+		`id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		`title` VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+		`x` INT(10) NOT NULL
+	) ENGINE=MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+	');}catch(Exception $e){echo $db->error;}
+	echo '<br>';
+
+	#L7
+	echo('<h3>C9L7: </h3>');
+	$db->query('USE db1');
+	if(isset($_POST['regemail1'])){ #thats how you should not send data to DB!!!
+		$n=$db->real_escape_string(htmlspecialchars($_POST['regname1']));
+		$m=$db->real_escape_string(htmlspecialchars($_POST['regemail1']));
+		$p=$db->real_escape_string(htmlspecialchars(password_hash($_POST['regpassword1'],PASSWORD_BCRYPT)));
+		$ip_reg=ip2long($_SERVER['REMOTE_ADDR']);
+		try{$db->query("INSERT INTO secret_users (`name`,`email`,`password`,`ip_reg`,`date_reg`) VALUES('$n','$m','$p','$ip_reg',UNIX_TIMESTAMP())");echo 'Registered successfully!';}catch(Exception $e){echo 'Failed to register!';}echo '<br>';
+	}
+?>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<p><input type=text name=regname1 placeholder=Name></p>
+		<p><input type=text name=regemail1 placeholder=E-mail></p>
+		<p><input type=text name=regpassword1 placeholder=Password></p>
+		<p><input type=submit value='Sign up'></p>
+	</form>
+	<br>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<p><input type=text name=logemail1 placeholder=E-mail></p>
+		<p><input type=text name=logpassword1 placeholder=Password></p>
+		<p><input type=submit value='Login'></p>
+	</form>
+<?php
+	if(isset($_POST['logemail1'])){
+		$fl=0;
+		$m=$db->real_escape_string(htmlspecialchars($_POST['logemail1']));
+		$p=$db->real_escape_string(htmlspecialchars($_POST['logpassword1']));
+		if(mysqli_num_rows($db->query("SELECT * FROM `secret_users` WHERE `email`='$m'"))==1) if(password_verify($p,mysqli_fetch_array($db->query("SELECT `password` FROM `secret_users` WHERE `email`='$m'"))['password'])){echo 'Login successfull!';$fl=1;}
+		if($fl==0) echo 'Failed to login!';
+	}
+	echo '<br>';
+	
+	if(isset($_POST['send_time'])){ #thats how you must send data to DB!!!
+		$t=$db->real_escape_string(htmlspecialchars($_POST['timezone1']));
+		$o=$db->real_escape_string(htmlspecialchars($_POST['offset1'])); #with prepare real_escape_string is not necessary
+		if(is_string($t)&&is_numeric($o)){
+			if($stmt=$db->prepare("INSERT INTO `secret_timezones` (`id`,`title`,`offset`) VALUES (NULL, ?, ?)")){
+				$stmt->bind_param('si',$t,$o);
+				$stmt->execute();
+				$stmt->close();
+			}
+		}else echo 'Input values are invalid!<br>';
+	}
+?>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<p><input type=text name=timezone1 placeholder=Timezone></p>
+		<p><input type=text name=offset1 placeholder=Offset></p>
+		<p><input type=submit name=send_time value=Send></p>
+		<select name=selecttimezones>
+			<?php
+				if($stmt=$db->prepare("SELECT * FROM `secret_timezones` ORDER BY `offset`")){
+					$stmt->execute();
+					$meta=$stmt->result_metadata();
+					while($field=$meta->fetch_field()) $params[]=&$row[$field->name];
+					call_user_func_array([$stmt,'bind_result'],$params); #3 lines of code to fetch multidimensional array from database, that is called metadata
+					$i=1;
+					while($stmt->fetch()){
+						echo '<option value='.$row['offset'].'>'.$i.') '.$row['title'].', '.$row['offset'].'</option>';
+						$i++;
+					}
+					$stmt->close();
+				}
+			?>
+		</select>
+		<p><input type=submit name=Real_get value=Get></p>
+		<?php
+			if(isset($_POST['Real_get']))
+				if($stmt=$db->prepare("SELECT `title`, `offset` FROM `secret_timezones` WHERE `offset`=?")){
+					$stmt->bind_param('s',$_POST['selecttimezones']);
+					$stmt->execute(); #for bind_params to work
+					$stmt->bind_result($ti,$of);
+					$stmt->fetch(); #for bind_result to work
+					echo '<p>'.$ti.'</p><p>'.$of.'</p>';
+					$stmt->close();
+				}
+		?>
+	</form>
+<?php
+	echo '<br>';
+	
+	#L8
+	echo('<h3>C9L8: Selecting data from DB</h3>'); #Okay, lets forget all above and start how he wants...
+	$result_set=$db->query('SELECT * FROM `secret_users`');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	// print_r($result_set->fetch_all()); #same but without keys of rows
+	$result_set=$db->query('SELECT `email`, `name` FROM `secret_users`');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query('SELECT `balance`, `name` FROM `secret_users` WHERE `name`=\'Me\'');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `email`, `name` FROM `secret_users` WHERE `email` LIKE 'g%'");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE `id` IN (1,3,5)");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE `id` IN (1,3,5) AND `email` LIKE 'a%'");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE `id` IN (1,3,5) OR `email` LIKE 'g%'");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE (`id` IN (1,3,5) OR `email` LIKE 'g%') AND `name` LIKE '%t%'");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE `email` LIKE '%m%' ORDER BY `name`");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` WHERE `email` LIKE '%m%' ORDER BY `name` DESC");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT `id`, `email`, `name` FROM `secret_users` ORDER BY `name`, `date_reg`");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT * FROM `secret_users` INNER JOIN `secret_articles` ON `secret_users`.`id`=`secret_articles`.`user_id`");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query("SELECT *, `secret_users`.`email` as `e`, `secret_articles`.`text` as `t` FROM `secret_users` INNER JOIN `secret_articles` ON `secret_users`.`id`=`secret_articles`.`user_id`");$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query('SELECT COUNT(`id`) as `count` FROM `secret_users`');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>count = '.$table[0]['count'].'<br>';
+	$result_set=$db->query('SELECT SUM(`id`) as `sum` FROM `secret_users` WHERE `id` < "3"');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>sum = '.$table[0]['sum'].'<br>';
+	$result_set=$db->query('SELECT * FROM `secret_users` WHERE `id` < "3" LIMIT 1');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query('SELECT * FROM `secret_users` LIMIT 1,3');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	$result_set=$db->query('SELECT * FROM `secret_users` ORDER BY RAND() LIMIT 1');$table=[];
+	while($row=$result_set->fetch_assoc()) $table[]=$row;print_r($table);echo '<br>';
+	echo '<br>';
+?>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<select name=selecttimezones>
+			<?php
+				$stmt=$db->query("SELECT `title` FROM `secret_timezones` ORDER BY `title`");
+				while($row=$stmt->fetch_assoc()) echo '<option value=\''.$row['title'].'\'>'.$row['title'].'</option>';
+			?>
+		</select>
+		<p><input type=submit name=Real_get value=Get></p>
+		<?php
+			if(isset($_POST['Real_get']))
+				if($stmt=$db->prepare("SELECT `offset` FROM `secret_timezones` WHERE `title`=?")){
+					$stmt->bind_param('s',$_POST['selecttimezones']);
+					$stmt->execute();
+					$stmt->bind_result($of);
+					$stmt->fetch();
+					echo '<p>Offset is: '.$of.'</p>';
+					$stmt->close();
+				}
+		?>
+	</form>
+<?php
+	echo '<br>';
+	
+	#L9
+	echo('<h3>C9L9: Extension PDO</h3>');
+	try{
+		$pdo=new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASSWORD,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]); #option [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION] is not necessary cause it is default now
+	}catch(PDOException $e){echo 'Could not connect to DB: '.$e;}
+	$query='SELECT * FROM `secret_users`';
+	$result=$pdo->query($query);echo print_r($result,1).'<br>';
+	$row=$result->fetch(PDO::FETCH_ASSOC);echo print_r($row,1).'<br>';
+	$query='INSERT INTO `secret_articles` (`user_id`,`title`,`text`,`date`) VALUES ("1","New article","Text...!",UNIX_TIMESTAMP())';
+	try{$result=$pdo->exec($query);$last_id=$pdo->lastInsertId();echo '<br>'.$result.', '.$last_id.'<br>';}catch(PDOException $e){echo $e->getMessage().'<br>';}
+	$query='UPDATE `secret_articles` SET `date`=`date`+1';$result=$pdo->exec($query);echo $result.'<br>';
+	$query="DELETE FROM `secret_articles` WHERE `id`='$last_id'";$result=$pdo->exec($query);echo $result.'<br>';
+	$query='SELECT * FROM `secret_users`';$result=$pdo->query($query);$table=$result->fetchAll(PDO::FETCH_ASSOC);echo print_r($table,1).'<br>';
+	$email='vasya@mail.ru';
+	$query='SELECT * FROM `secret_users` WHERE `email`=?';
+	$query=$pdo->prepare($query);
+	$query->execute([$email]);
+	$row=$query->fetch(PDO::FETCH_ASSOC);
+	print_r($row);
+	$query='SELECT * FROM `secret_users` WHERE `email`=:mail';
+	$query=$pdo->prepare($query);
+	$query->execute(['mail'=>$email]);
+	$row=$query->fetch(PDO::FETCH_ASSOC);
+	print_r($row);
+	echo '<br>';
+
+	#thats how you must send data to DB!!! improved version
+	$pdo=new PDO('mysql:host=localhost;dbname=db1','php','pwd');
+	if(isset($_POST['send_time'])){
+		$t=htmlspecialchars($_POST['timezone2']);
+		$o=htmlspecialchars($_POST['offset2']);
+		if(is_string($t)&&is_numeric($o)){
+			if($stmt=$pdo->prepare("INSERT INTO `secret_timezones` (`id`,`title`,`offset`) VALUES (NULL, ?, ?)")) $stmt->execute([$t,$o]);
+		}else echo 'Input values are invalid!<br>';
+	}
+?>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<p><input type=text name=timezone2 placeholder=Timezone></p>
+		<p><input type=text name=offset2 placeholder=Offset></p>
+		<p><input type=submit name=send_time1 value=Send></p>
+	</form>
+	<form method=post action=<?=$_SERVER['REQUEST_URI']?>>
+		<select name=selecttimezones1>
+			<?php
+				if($stmt=$pdo->prepare("SELECT `title`, `offset` FROM `secret_timezones` ORDER BY `offset`")){
+					$stmt->execute();
+					$i=1;
+					foreach($stmt->fetchAll() as $v){
+						echo '<option value='.$v['offset'].'>'.$i.') '.$v['title'].', '.$v['offset'].'</option>';
+						$i++;
+					}
+				}
+			?>
+		</select>
+		<p><input type=submit name=Real_get1 value=Get></p>
+		<?php
+			if(isset($_POST['Real_get1']))
+				if($stmt=$pdo->prepare("SELECT `title`, `offset` FROM `secret_timezones` WHERE `offset`=?")){
+					$stmt->execute([$_POST['selecttimezones1']]);
+					$r=$stmt->fetch();
+					echo '<p>'.$r['title'].'</p><p>'.$r['offset'].'</p>';
+				}
+		?>
+	</form>
+<?php
+	
+	$db->close();
+	
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+
+	#Example of very straightforward path to connect to DB
+	// class class_mysql{
+
+
+	// 	public $PATH_INC = "/home/anova1/public_html/templates";
+	// 	public $PATH_REQ = "/home/anova1/public_html/req";
+	// 	public $PATH_DATA = "/home/anova1/public_html/data";
+	// 	public $PATH_IMG = "/home/anova1/public_html<feff>/images";
+	// 	public $PATH_WWW = '/home/anova1/public_html<feff>';
+	// 	public $PATH_WWW_PIC = "/home/anova1/public_html<feff>/images";
+	// 	public $PATH_WWW_PH = "/home/anova1/public_html/photos/";
+	// 	public $PATH_WWW_JS = "/home/anova1/public_html/js/";
+
+
+
+	// 	// Основной URL
+	// 	public $PATH_HTTP="http://a-nova.ru/sam/";
+	// 	public $PATH_ADMIN="http://a-nova.ru/admin/";
+
+	// 	// Время кеширования страниц "Expires" (в секундах)
+	// 	public $CACHE_TIME=300;
+
+	// 	// Максимальный размер подгружаемого в базу текста
+	// 	public $TEXT_SIZE_MAX= 1048576; // это мегабайт
+
+	// 	// Минимальный размер подгружаемого в базу текста
+	// 	public $TEXT_SIZE_MIN=100; // сто байт
+
+	// 	// Формат вывода времени (из SQL-базы)
+	// 	public $TIME_FORMAT="%H:%i:%S"; // ЧЧ:ММ:СС
+
+	// 	// Формат вывода даты (из SQL-базы)
+	// 	public $DATE_FORMAT="%d.%m.%Y"; // ДД.ММ.ГГГГ
+
+
+	// 	public $sql_login="anova1_user";
+	// 	public $sql_passwd="GVSB2mBD0BGn";
+	
+	// //   public $sql_login="root";
+	// //   public $sql_passwd="";
+	// 	public $sql_database="anova1_db";
+	// 	public $sql_host="localhost";
+
+	// 	public $con_id;
+	// 	public $sql_query;
+	// 	public $sql_err;
+	// 	public $sql_res;
+	
+	
+	// 	function sql_connect()
+	// 	{
+	// 		$this->con_id=mysqli_connect($this->sql_host,$this->sql_login,$this->sql_passwd,$this->sql_database);
+	// 		//mysqli_select_db($this->sql_database); 
+	// 		return $this->con_id;
+	// 	}
+
+	// 	function sql_execute()
+	// 	{
+	// 		$this->sql_res=mysqli_query($this->con_id, $this->sql_query);
+	// 		//$this->sql_err=mysqli_error();
+	// 		//echo('error! '.$this->sql_err);
+	// 	}
+
+	// 	function sql_close()
+	// 	{
+	// 		mysqli_close($this->con_id);
+	// 	}
+
+	// }
+?>
+
+
+<h1>Chapter 10: Composer goes whoosh</h1>
+
+
+<h1>Chapter 11: Examples of PHP projects</h1>
+<?php
+
+	#L1
+	echo('<h3>C11L1: Uploading files to server</h3>'); #cant upload files more than 2mb because of settings in php.ini upload_max_filesize = 2M , also post_max_size = 8M will prevent uploading too
+	if (isset($_POST['upload']))
+	{
+		print_r($_FILES);
+		$n = '';
+		$fl = 0;
+		$blacklist = ['.php', '.phtml', '.php3', '.php4', '.html', '.htm'];
+		$upload = 'res/uploads/'.$_FILES['up']['name'];
+		foreach ($blacklist as $item)
+			if (preg_match("/$item$/", $_FILES['up']['name']))
+				{
+					echo('<br><b>Wrong files extension!</b>');
+					$fl=1;
+				}
+		if ($_FILES['up']['size'] > 1024*2000)
+		{
+			echo('<br><b>File is too chunky!</b>');
+			$fl = 1;
+		}
+		
+		if (preg_match('/image/',$_FILES['up']['type']))
+		{
+			$type = $_FILES['up']['type'];
+			$type = getimagesize($_FILES['up']['tmp_name']);
+			print_r($type);
+			if (!$type)
+			{
+				echo('<br><b>Wrong image type!</b>');
+				$fl = 1;
+			}
+			$n = 'Image';
+		}
+
+		if (preg_match('/audio/',$_FILES['up']['type']))
+		{
+			$n = 'Audio';
+		}
+
+		if (($fl != 1) && $n)
+		{
+			move_uploaded_file($_FILES['up']['tmp_name'],$upload);
+			echo "<br><b>$n file uploaded successfully!</b>";
+		}
+		else
+		{
+			echo '<br><b>Something went wrong.File did not upload!</b>';
+		}
+	}
+?>
+	<form actoin=<?=$_SERVER['REQUEST_URI']?> method=post enctype=multipart/form-data>
+		<h4>Files must be less than 2 MB</h4>
+		<p><input type=file name=up></p>
+		<p><input type=submit name=upload value=Upload!></p>
+	</form>
+<?php
+	echo '<h2>Audio files</h2>';
+	foreach (scandir('res/uploads') as $f)
+	{
+		if (preg_match('/\.((ogg)|(wav)|(mp4))$/',$f))
+			echo '<figure><figurecaption><h4>Name of file: '.$f.'</h4></figurecaption><audio controls src=\'res/uploads/'.$f.'\'></audio></figure>';
+	}
+	echo '<h2>Image files</h2>';
+	foreach (scandir('res/uploads') as $f)
+	{
+		if (preg_match('/\.((jpg)|(png)|(jpeg))$/',$f))
+			echo '<figure><figurecaption><h4>Name of file: '.$f.'</h4></figurecaption><img src=\'res/uploads/'.$f.'\'></figure>';
+	}
+	echo '<br>';
+
+	#L2
+	echo('<h3>C11L2: Captcha creation and testing</h3>');
+	echo '<br>';
+
+	#Unset
+	foreach(array_keys($GLOBALS) as $k=>$v) if($k>5) unset($GLOBALS[$v]);unset($v,$k);
+?>
+
+
+<?php
+echo '<pre>';print_r($GLOBALS);echo '</pre>';
+echo '<h1>Source code!</h1>';
+echo '<pre>'.htmlentities(file_get_contents('res/php/index')).'</pre>';
+?>

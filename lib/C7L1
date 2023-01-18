@@ -1,0 +1,9 @@
+<?php
+$a5=$_POST['a']??'';
+if($a5=='Google') header('Location: https://google.com');
+if($a5=='Example') header('Location: https://example.com');
+?>
+<form action=<?=$_SERVER['REQUEST_URI']?> method=post>
+    <input type=submit name=a value=Google>
+    <input type=submit name=a value=Example>
+</form>
