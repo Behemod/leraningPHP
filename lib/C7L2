@@ -1,0 +1,15 @@
+<?php $s=isset($_POST['s'])?$_POST['s']:($_COOKIE['bcolor']??'');setcookie('bcolor',$s,time()+60);?>
+<style>body{background-color: <?=$s?>;}</style>
+<script>
+    if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<form name=f action=<?=$_SERVER['REQUEST_URI']?> method=post>
+    <select name=s>
+        <option value=red>Red</option>
+        <option value=green>Green</option>
+        <option value=blue>Blue</option>
+    </select>
+    <input type=submit value=Select!>
+</form>

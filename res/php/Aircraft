@@ -1,0 +1,10 @@
+<?php
+namespace aircraft;
+trait CanFly{
+    function fly(){
+        echo 'Flight of airplane.<br>';
+    }
+}
+class Aircraft{
+    use CanFly;
+}

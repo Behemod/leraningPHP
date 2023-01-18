@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#Instalation module for server to work
+
+export DEBIAN_FRONTEND=noninteractive
+debconf-set-selections <<< "postfix postfix/mailname string 'mail.localhost'"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+apt update
+apt upgrade -y
+apt install -y apache2 php php-mbstring php-intl postfix php-gd php-curl mysql-server php-mysqli
+# a2enmod php* #if reinstalation or something went wrong add another modules
+# sed '/<Directory\s\/var\/www\/>/,/<\/Directory>/s/AllowOverride\sNone/AllowOverride All/' -i /etc/apache2/apache2.conf #if you are desperate, change default config
+sed '/DocumentRoot\s\/var\/www\/html/a \
+\n\t<Directory \/var\/www\/>\n\t\tAllowOverride All\n\t<\/Directory>' -i /etc/apache2/sites-enabled/*
+mysql -uroot -proot -Bse "CREATE USER 'php'@'localhost' IDENTIFIED BY 'pwd';GRANT ALL ON *.* TO 'php'@'localhost' WITH GRANT OPTION;flush privileges;" #create user to use in php scripts with php-mysqli module
+systemctl restart apache2

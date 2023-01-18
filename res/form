@@ -1,0 +1,11 @@
+<form name=mf action=<?=$_SERVER['REQUEST_URI']?> method=post><!--Useful REQUEST_URI!-->
+	<div>
+		X: <input type=text name=x value=<?=$x?>>
+	</div>
+	<div>
+		Y: <input type=text name=y value=<?=$y?>>
+	</div>
+	<div>
+        	<input type=submit name=mf value=summarize>
+        </div>
+</form>

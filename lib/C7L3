@@ -1,0 +1,19 @@
+<?php
+// session_start();
+$s=isset($_POST['s1'])?$_POST['s1']:($_SESSION['bcolor']??'');
+$_SESSION['bcolor']=$s;
+?>
+<style>body{background-color: <?=$s?>;}</style>
+<script>
+    if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<form name=f1 action=<?=$_SERVER['REQUEST_URI']?> method=post>
+    <select name=s1>
+        <option value=red>Red</option>
+        <option value=green>Green</option>
+        <option value=blue>Blue</option>
+    </select>
+    <input type=submit value=Select!>
+</form>

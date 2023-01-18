@@ -1,0 +1,10 @@
+<?php
+namespace car;
+trait CanMove{
+    function move(){
+        echo 'Movement of car.<br>';
+    }
+}
+class Car{
+    use CanMove;
+}
